@@ -4,28 +4,45 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
-{  
-    [SerializeField] float runSpeed = 10f;
-    Vector2 moveInput;
-    Rigidbody2D myRigidbody;
+{
+    [SerializeField] float speed = 5.0f;
+    [SerializeField] float jumpForce = 5.0f;
+    private Rigidbody2D rb;
+    private bool isGrounded = false;
+    private Vector2 moveDirection;
     void Start()
     {
-        myRigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        Run();
+        Vector2 movement = new Vector2(moveDirection.x * speed, rb.velocity.y);
+        rb.velocity = movement;
+        if (GetComponent<PlayerInput>().actions["Jump"].triggered && isGrounded)
+        {
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
 
-    void OnMove(InputValue value)
+    public void OnMove(InputValue value)
     {
-        moveInput =value.Get<Vector2>();
+        moveDirection = value.Get<Vector2>();
     }
 
-    void Run()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        Vector2 playerVelocity = new Vector2 (moveInput.x * runSpeed , myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isGrounded = false;
+        }
     }
 }
