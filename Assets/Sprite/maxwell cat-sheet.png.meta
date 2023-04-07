@@ -1,0 +1,347 @@
+fileFormatVersion: 2
+guid: 71dda2ac4b969c24fb09b11581c3ea8d
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: 0
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: maxwell cat-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 4
+        width: 99
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30c1b5b79a82a7449a5f8917cb99d9aa
+      internalID: 1443353007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 4
+        width: 99
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6604925ba1f485447b1241e67bfed1fa
+      internalID: -658614592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 4
+        width: 100
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bb9639a5c3d701429d14b5c51fa2d4e
+      internalID: -1114583854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 4
+        width: 99
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c924656868c7e0e44acd98e20afdb612
+      internalID: 2146604462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 4
+        width: 100
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 1, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa8720d4689298c40b40c4b7a3441ab4
+      internalID: -447635993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1
+        width: 97
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d44a91b899b7ff549ae3a85784256248
+      internalID: -1573507827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 5
+        width: 95
+        height: 65
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53d4e491c630b8c47989ddc463981ba0
+      internalID: -1552075552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: maxwell cat-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 1
+        width: 97
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632869b20c678ed48882370815a810e1
+      internalID: -1985316537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape:
+    - - {x: -400, y: -46}
+      - {x: -399, y: 18}
+      - {x: -298, y: 20}
+      - {x: -299, y: -4}
+      - {x: -301, y: -21}
+      - {x: -302, y: -46}
+    - - {x: -296, y: -46}
+      - {x: -301, y: -22}
+      - {x: -300, y: -13}
+      - {x: -299, y: -4}
+      - {x: -296, y: 24}
+      - {x: -200, y: 24}
+      - {x: -200, y: -46}
+    - - {x: -199, y: -46}
+      - {x: -200, y: -28}
+      - {x: -200, y: -19}
+      - {x: -200, y: 0}
+      - {x: -199, y: 23}
+      - {x: -100, y: 23}
+      - {x: -100, y: -46}
+    - - {x: -100, y: -46}
+      - {x: -100, y: 23}
+      - {x: 1, y: 25}
+      - {x: 0, y: -14}
+      - {x: -1, y: -20}
+      - {x: -1, y: -46}
+    - - {x: 1, y: -46}
+      - {x: -1, y: -21}
+      - {x: 0, y: -16}
+      - {x: 2, y: 19}
+      - {x: 101, y: 19}
+      - {x: 100, y: -15}
+      - {x: 94, y: -21}
+      - {x: 94, y: -46}
+    - - {x: 101, y: -49}
+      - {x: 99, y: -35}
+      - {x: 99, y: -22}
+      - {x: 102, y: 18}
+      - {x: 195, y: 18}
+      - {x: 198, y: 1}
+      - {x: 194, y: -48}
+    - - {x: 202, y: -45}
+      - {x: 202, y: 22}
+      - {x: 299, y: 22}
+      - {x: 299, y: -45}
+    - - {x: 301, y: -50}
+      - {x: 300, y: 22}
+      - {x: 398, y: 22}
+      - {x: 398, y: -48}
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      maxwell cat-sheet_0: 1443353007
+      maxwell cat-sheet_2: -658614592
+      maxwell cat-sheet_1: -1114583854
+      maxwell cat-sheet_5: 2146604462
+      maxwell cat-sheet_6: -447635993
+      maxwell cat-sheet_4: -1573507827
+      maxwell cat-sheet_7: -1552075552
+      maxwell cat-sheet_3: -1985316537
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -10,12 +10,19 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private Vector2 moveDirection;
+    Animator myAnimator;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     void Update()
+    {
+        Jump();
+    }
+
+    void Jump()
     {
         Vector2 movement = new Vector2(moveDirection.x * speed, rb.velocity.y);
         rb.velocity = movement;
@@ -28,6 +35,7 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveDirection = value.Get<Vector2>();
+        myAnimator.SetBool("run",true);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
