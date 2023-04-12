@@ -35,7 +35,14 @@ public class Player : MonoBehaviour
     public void OnMove(InputValue value)
     {
         moveDirection = value.Get<Vector2>();
-        myAnimator.SetBool("run",true);
+        if (moveDirection.x != 0)
+        {
+            myAnimator.SetBool("run", true);
+        }
+        else
+        {
+            myAnimator.SetBool("run", false);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
