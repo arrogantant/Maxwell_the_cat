@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 5.0f;
     [SerializeField] float jumpForce = 5.0f;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
     private bool isGrounded = false;
     private Vector2 moveDirection;
     Animator myAnimator;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -38,6 +40,7 @@ public class Player : MonoBehaviour
         if (moveDirection.x != 0)
         {
             myAnimator.SetBool("run", true);
+            sr.flipX = moveDirection.x < 0;
         }
         else
         {
