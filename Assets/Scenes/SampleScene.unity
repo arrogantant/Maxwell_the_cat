@@ -1050,7 +1050,7 @@ GameObject:
   - component: {fileID: 2102277996}
   - component: {fileID: 2102277995}
   - component: {fileID: 2102277997}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: map
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -1200,6 +1200,18 @@ PrefabInstance:
     - target: {fileID: 6561343355352960144, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6561343355352960147, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6561343355352960147, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: groundCheckOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6561343355352960147, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: groundCheckOffset.y
+      value: -0.12
       objectReference: {fileID: 0}
     - target: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_Name
