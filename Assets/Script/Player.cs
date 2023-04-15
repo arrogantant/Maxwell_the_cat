@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] float checkDistance = 0.1f;
     [SerializeField] float acceleration = 15.0f;
     [SerializeField] float deceleration = 40.0f;
+    [SerializeField] float groundCheckRadius = 0.15f;
+    
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private bool isGrounded = false;
@@ -36,7 +38,7 @@ public class Player : MonoBehaviour
     {
         float targetSpeed = moveDirection.x * speed;
         float currentSpeed = rb.velocity.x;
-
+        
         if (Mathf.Abs(moveDirection.x) > 0)
         {
             currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour
 
  
         Vector2 checkPosition = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
-        isGrounded = Physics2D.Raycast(checkPosition, Vector2.down, checkDistance, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, groundLayer);
     }
 
     void Jump()
