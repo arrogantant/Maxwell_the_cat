@@ -28,9 +28,18 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //점프
         if (GetComponent<PlayerInput>().actions["Jump"].triggered && isGrounded)
         {
             Jump();
+        }
+           if (isGrounded)
+        {
+            myAnimator.SetBool("Jump", false);
+        }
+            else
+        {
+            myAnimator.SetBool("Jump", true);
         }
     }
 
