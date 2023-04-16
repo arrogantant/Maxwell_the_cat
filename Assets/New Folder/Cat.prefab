@@ -101,10 +101,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1.1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -131,6 +131,9 @@ MonoBehaviour:
   acceleration: 40
   deceleration: 40
   groundCheckRadius: 0.15
+  dashForce: 11
+  dashDuration: 0.15
+  dashCooldown: 0.5
   groundCheckOffset: {x: 0, y: -0.18}
 --- !u!114 &6561343355352960146
 MonoBehaviour:
