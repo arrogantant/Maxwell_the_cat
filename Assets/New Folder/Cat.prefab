@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 836890260}
   m_Layer: 0
   m_Name: Cat
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -369267301
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -1532432199, guid: 30c432ec85b93734cb12ceda227c3e5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -134,6 +134,7 @@ MonoBehaviour:
   dashForce: 11
   dashDuration: 0.15
   dashCooldown: 0.5
+  maxJumpCount: 1
   groundCheckOffset: {x: 0, y: -0.18}
 --- !u!114 &6561343355352960146
 MonoBehaviour:
