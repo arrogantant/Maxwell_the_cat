@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class DoubleJump_Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
+        if (collision.CompareTag("Player"))
+        {
+            Player player = collision.GetComponent<Player>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            if (!player.IsGrounded())
+            {
+                int currentMaxJumpCount = player.GetMaxJumpCount();
+                player.SetMaxJumpCount(currentMaxJumpCount + 1);
+                Destroy(gameObject);
+            }
+        }
     }
 }

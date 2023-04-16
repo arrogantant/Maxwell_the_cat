@@ -945,7 +945,8 @@ GameObject:
   - component: {fileID: 596663697}
   - component: {fileID: 596663699}
   - component: {fileID: 596663698}
-  m_Layer: 0
+  - component: {fileID: 596663700}
+  m_Layer: 8
   m_Name: Double_Jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -960,7 +961,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 596663696}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.32, y: 0.42, z: 0}
+  m_LocalPosition: {x: -6.139, y: 0.696, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1029,12 +1030,24 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.07
+--- !u!114 &596663700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 596663696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b5ac4e47131a94195a380114d49aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &744177422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2353,9 +2366,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6561343355352960147, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: maxJumpCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_Name
       value: Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}

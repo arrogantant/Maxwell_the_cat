@@ -45,6 +45,7 @@ public class Player : MonoBehaviour
            if (isGrounded)
         {
             myAnimator.SetBool("Jump", false);
+            maxJumpCount = 1;
         }
             else
         {
@@ -145,5 +146,20 @@ public class Player : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawRay(checkPosition, Vector2.down * checkDistance);
         }
+    }
+
+    public int GetMaxJumpCount()
+    {
+        return maxJumpCount;
+    }
+
+    public void SetMaxJumpCount(int newMaxJumpCount)
+    {
+        maxJumpCount = newMaxJumpCount;
+    }
+
+    public bool IsGrounded()
+    {
+        return isGrounded;
     }
 }
