@@ -32,6 +32,13 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+
+        //세이브
+        if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY") && PlayerPrefs.HasKey("SavedZ"))
+        {
+            Vector3 savedPosition = new Vector3(PlayerPrefs.GetFloat("SavedX"), PlayerPrefs.GetFloat("SavedY"), PlayerPrefs.GetFloat("SavedZ"));
+            transform.position = savedPosition;
+        }
     }
 
     void Update()
