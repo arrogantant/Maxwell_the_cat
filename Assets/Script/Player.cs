@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] Vector2 groundCheckOffset;
     private bool isOverPipe = false;
     private WarpPipe currentPipe;
+    [SerializeField] private float maxPushForce = 30f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -253,5 +254,9 @@ public class Player : MonoBehaviour
     {
         canDashSwamp = value;
     }
+    public float GetMaxPushForce()
+{
+    return maxPushForce;
+}
     
 }
