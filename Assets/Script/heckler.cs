@@ -25,10 +25,19 @@ private void OnCollisionEnter2D(Collision2D collision)
 {
     if (collision.gameObject.CompareTag("Player"))
     {
-        Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+        Player player = collision.gameObject.GetComponent<Player>();
+        if (player != null)
+        {
+            Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
+            Vector2 newForce = pushDirection * pushForce;
 
-        Vector2 pushDirection = (collision.transform.position - transform.position).normalized;
-        playerRigidbody.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+            // 적용될 힘을 계산하고 최대 힘을 초과하지 않도록 제한합니다.
+            Vector2 resultingForce = playerRigidbody.velocity + newForce;
+            resultingForce = Vector2.ClampMagnitude(resultingForce, player.GetMaxPushForce());
+
+            playerRigidbody.velocity = resultingForce;
+        }
     }
 }
 }
