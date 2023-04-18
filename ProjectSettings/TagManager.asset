@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - DisappearingPlatform
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - BackGround
   - Item
   - swampLayer
-  - 
+  - icepLayer
   - 
   - 
   - 

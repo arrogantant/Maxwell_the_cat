@@ -156,6 +156,23 @@ public class Player : MonoBehaviour
             myAnimator.SetBool("run", false);
         }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("DisappearingPlatform"))
+        {
+            PlatformDisappear platform = collision.gameObject.GetComponent<PlatformDisappear>();
+            if (platform != null)
+            {
+                StartCoroutine(PlatformDisappearCoroutine(platform));
+            }
+        }
+    }
+
+    private IEnumerator PlatformDisappearCoroutine(PlatformDisappear platform)
+    {
+        yield return new WaitForSeconds(0.1f);
+        platform.Disappear();
+    }
 
     void OnDrawGizmos()
     {
