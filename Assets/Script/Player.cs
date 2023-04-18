@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     private Vector2 moveDirection;
     Animator myAnimator;
     [SerializeField] Vector2 groundCheckOffset;
+    private bool isOverPipe = false;
+    private WarpPipe currentPipe;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        CheckForPipeTeleport();
         //점프
         if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
         {
@@ -156,15 +159,37 @@ public class Player : MonoBehaviour
             myAnimator.SetBool("run", false);
         }
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "WarpPipe")
+        {
+            isOverPipe = true;
+            currentPipe = collision.GetComponent<WarpPipe>();
+        }
+    }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("DisappearingPlatform"))
+        if (collision.gameObject.CompareTag("WarpPipe"))
+        {
+            isOverPipe = false;
+            currentPipe = null;
+        }
+            if (collision.gameObject.CompareTag("DisappearingPlatform"))
         {
             PlatformDisappear platform = collision.gameObject.GetComponent<PlatformDisappear>();
             if (platform != null)
             {
                 StartCoroutine(PlatformDisappearCoroutine(platform));
             }
+        }
+        
+    }
+    private void CheckForPipeTeleport()
+    {
+        var keyboard = Keyboard.current;
+        if (isOverPipe && (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame))
+        {
+            currentPipe.TeleportPlayer(transform);
         }
     }
 
@@ -228,4 +253,5 @@ public class Player : MonoBehaviour
     {
         canDashSwamp = value;
     }
+    
 }
