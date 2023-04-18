@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     [SerializeField] float speed = 5.0f;
     [SerializeField] float jumpForce = 5.0f;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] private LayerMask swampLayer;
+    [SerializeField] private float sinkingSpeed = 1.0f;
     [SerializeField] float checkDistance = 0.1f;
     [SerializeField] float acceleration = 15.0f;
     [SerializeField] float deceleration = 40.0f;
@@ -17,10 +19,13 @@ public class Player : MonoBehaviour
     [SerializeField] float dashCooldown = 0.5f;
     private int jumpCount = 0;
     [SerializeField] int maxJumpCount = 2;
-    private bool isDashing = false;
+    public bool isDashing = false;
     private bool canDash = true;
+    [SerializeField] float swampSpeedModifier = 0.5f;
+    [SerializeField] float swampAnimationSpeedModifier = 0.5f;
+    private bool isInSwamp = false;
+    private bool canDashSwamp;
     private int dashCount = 1;
-    
     private Rigidbody2D rb;
     private SpriteRenderer sr;
     private bool isGrounded = false;
@@ -32,6 +37,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        canDashSwamp = true;
 
         //세이브
         if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY") && PlayerPrefs.HasKey("SavedZ"))
@@ -60,7 +66,7 @@ public class Player : MonoBehaviour
         }
 
         //대쉬
-        if (GetComponent<PlayerInput>().actions["Dash"].triggered && !isDashing && dashCount > 0 && canDash) // 'canDash' 변수 사용
+        if (GetComponent<PlayerInput>().actions["Dash"].triggered && !isDashing && dashCount > 0 && canDash && canDashSwamp) // 'canDash' 변수 사용
         {
             StartCoroutine(Dash());
             dashCount--; // 대쉬 횟수 감소
@@ -73,8 +79,9 @@ public class Player : MonoBehaviour
         if (!isDashing)
         {
         float targetSpeed = moveDirection.x * speed;
+
         float currentSpeed = rb.velocity.x;
-        
+
         if (Mathf.Abs(moveDirection.x) > 0)
         {
             currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
@@ -86,9 +93,14 @@ public class Player : MonoBehaviour
 
         Vector2 movement = new Vector2(currentSpeed, rb.velocity.y);
         rb.velocity = movement;
-
- 
         Vector2 checkPosition = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
+        bool isInSwamp = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, swampLayer);
+
+        if (isInSwamp)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - sinkingSpeed * Time.fixedDeltaTime);
+        }
+        
         isGrounded = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, groundLayer);
         }
         if (isGrounded)
@@ -154,6 +166,29 @@ public class Player : MonoBehaviour
             Gizmos.DrawRay(checkPosition, Vector2.down * checkDistance);
         }
     }
+    public void SetIsInSwamp(bool isInSwamp)
+    {
+        this.isInSwamp = isInSwamp;
+        if (isInSwamp)
+        {
+            speed *= swampSpeedModifier;
+        }
+        else
+        {
+            speed /= swampSpeedModifier;
+        }
+    }
+    public void SetAnimationSpeedInSwamp(bool isInSwamp)
+    {
+        if (isInSwamp)
+        {
+            myAnimator.speed *= swampAnimationSpeedModifier;
+        }
+        else
+        {
+            myAnimator.speed /= swampAnimationSpeedModifier;
+        }
+    }
 
     public int GetMaxJumpCount()
     {
@@ -164,9 +199,16 @@ public class Player : MonoBehaviour
     {
         maxJumpCount = newMaxJumpCount;
     }
-
     public bool IsGrounded()
     {
         return isGrounded;
+    }
+    public bool IsDashing()
+    {
+        return isDashing;
+    }
+    public void SetCanDashSwamp(bool value)
+    {
+        canDashSwamp = value;
     }
 }
