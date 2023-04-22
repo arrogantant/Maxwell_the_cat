@@ -162,6 +162,14 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.CompareTag("Breakable") && isDashing)
+        {
+            Breakable breakable = collision.gameObject.GetComponent<Breakable>();
+            if (breakable != null)
+            {
+                breakable.Break();
+            }
+        }
         if (collision.tag == "WarpPipe")
         {
             isOverPipe = true;
@@ -169,7 +177,7 @@ public class Player : MonoBehaviour
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
-    {
+    {        
         if (collision.gameObject.CompareTag("WarpPipe"))
         {
             isOverPipe = false;
