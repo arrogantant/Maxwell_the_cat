@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     [SerializeField] float dashForce = 10.0f;
     [SerializeField] float dashDuration = 0.1f;
     [SerializeField] float dashCooldown = 0.5f;
-    [SerializeField] float buttStompForce = 15.0f;
     public bool isButtStomping = false;
     private int jumpCount = 0;
     [SerializeField] int maxJumpCount = 2;
@@ -94,34 +93,36 @@ public class Player : MonoBehaviour
     {
         if (!isDashing)
         {
-        float targetSpeed = moveDirection.x * speed;
+            float targetSpeed = moveDirection.x * speed;
+            float currentSpeed = rb.velocity.x;
 
-        float currentSpeed = rb.velocity.x;
+            if (Mathf.Abs(moveDirection.x) > 0)
+            {
+                currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
+            }
+            else
+            {
+                currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deceleration * Time.fixedDeltaTime);
+            }
 
-        if (Mathf.Abs(moveDirection.x) > 0)
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
-        }
-        else
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deceleration * Time.fixedDeltaTime);
-        }
+            Vector2 movement = new Vector2(currentSpeed, rb.velocity.y);
+            rb.velocity = movement;
+            Vector2 checkPosition = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
+            bool isInSwamp = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, swampLayer);
 
-        Vector2 movement = new Vector2(currentSpeed, rb.velocity.y);
-        rb.velocity = movement;
-        Vector2 checkPosition = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
-        bool isInSwamp = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, swampLayer);
-
-        if (isInSwamp)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - sinkingSpeed * Time.fixedDeltaTime);
-        }
-        
-        isGrounded = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, groundLayer);
-        }
+            if (isInSwamp)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - sinkingSpeed * Time.fixedDeltaTime);
+            }
+        }  
+        isGrounded = Physics2D.OverlapCircle(new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y), groundCheckRadius, groundLayer);
         if (isGrounded)
         {
             jumpCount = 0;
+            if (isButtStomping)
+            {
+                isButtStomping = false;
+            }
         }
     }
 
@@ -162,19 +163,11 @@ public class Player : MonoBehaviour
     {
         isButtStomping = true;
         canDash = false;
-        float dashStartTime = Time.time;
-        Vector2 originalVelocity = rb.velocity;
-        Vector2 stompVelocity = new Vector2(0, -buttStompForce);
+        float stompForce = -jumpForce * 2; // 더 빠르게 내려가도록 힘을 증가시킵니다.
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(0, stompForce), ForceMode2D.Impulse);
 
-        while (Time.time < dashStartTime + dashDuration)
-        {
-            rb.velocity = stompVelocity;
-            yield return null;
-        }
-
-        rb.velocity = originalVelocity;
-        isButtStomping = false;
-        yield return new WaitForSeconds(dashCooldown);
+        yield return new WaitUntil(() => isGrounded);
         canDash = true;
         dashCount++;
     }
@@ -217,13 +210,19 @@ public class Player : MonoBehaviour
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
-    {        
+    {   
+        if (isGrounded && isButtStomping)
+        {
+            isButtStomping = false;
+        }
+
         if (collision.gameObject.CompareTag("WarpPipe"))
         {
             isOverPipe = false;
             currentPipe = null;
         }
-            if (collision.gameObject.CompareTag("DisappearingPlatform"))
+        
+        if (collision.gameObject.CompareTag("DisappearingPlatform"))
         {
             PlatformDisappear platform = collision.gameObject.GetComponent<PlatformDisappear>();
             if (platform != null)
