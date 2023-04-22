@@ -143,6 +143,7 @@ MonoBehaviour:
   swampSpeedModifier: 0.1
   swampAnimationSpeedModifier: 0.5
   groundCheckOffset: {x: 0, y: -0.18}
+  maxPushForce: 20
 --- !u!114 &6561343355352960146
 MonoBehaviour:
   m_ObjectHideFlags: 0

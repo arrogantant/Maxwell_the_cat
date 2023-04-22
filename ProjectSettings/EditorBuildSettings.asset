@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/one.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/two.unity
+    path: Assets/Scenes/Cartoon.unity
     guid: 4a68469c17ac1b4428573fef954d8979
   - enabled: 0
     path: 
