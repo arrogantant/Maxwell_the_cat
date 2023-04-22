@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] float dashForce = 10.0f;
     [SerializeField] float dashDuration = 0.1f;
     [SerializeField] float dashCooldown = 0.5f;
+    [SerializeField] float buttStompForce = 15.0f;
+    public bool isButtStomping = false;
     private int jumpCount = 0;
     [SerializeField] int maxJumpCount = 2;
     public bool isDashing = false;
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        
         CheckForPipeTeleport();
         //점프
         if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
@@ -68,11 +71,20 @@ public class Player : MonoBehaviour
         {
             myAnimator.SetBool("Jump", true);
         }
+        var keyboard = Keyboard.current;
+        bool isDownKeyPressed = keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed;
 
-        //대쉬
+        
         if (GetComponent<PlayerInput>().actions["Dash"].triggered && !isDashing && dashCount > 0 && canDash && canDashSwamp) // 'canDash' 변수 사용
         {
-            StartCoroutine(Dash());
+            if(isDownKeyPressed)
+            {
+                StartCoroutine(ButtStomp());
+            }
+            else
+            {
+                StartCoroutine(Dash());
+            }
             dashCount--; // 대쉬 횟수 감소
             canDash = false; // 대쉬를 사용한 후 다시 사용할 수 없도록 함
         }
@@ -145,6 +157,26 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(dashCooldown); // 대쉬 쿨다운 대기
         canDash = true; // 쿨다운이 끝나면 대쉬를 다시 사용할 수 있음
         dashCount++; // 대쉬 쿨타임이 끝나면 대쉬 횟수를 증가시킴
+    }
+    IEnumerator ButtStomp()
+    {
+        isButtStomping = true;
+        canDash = false;
+        float dashStartTime = Time.time;
+        Vector2 originalVelocity = rb.velocity;
+        Vector2 stompVelocity = new Vector2(0, -buttStompForce);
+
+        while (Time.time < dashStartTime + dashDuration)
+        {
+            rb.velocity = stompVelocity;
+            yield return null;
+        }
+
+        rb.velocity = originalVelocity;
+        isButtStomping = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+        dashCount++;
     }
 
     void OnMove(InputValue value)
