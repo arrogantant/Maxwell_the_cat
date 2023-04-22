@@ -202,6 +202,14 @@ public class Player : MonoBehaviour
                 breakable.Break();
             }
         }
+        if (collision.gameObject.CompareTag("ButtStomp") && isButtStomping)
+        {
+            ButtStomp buttStomp = collision.gameObject.GetComponent<ButtStomp>();
+            if (buttStomp != null)
+            {
+                buttStomp.Break();
+            }
+        }
         if (collision.tag == "WarpPipe")
         {
             isOverPipe = true;
