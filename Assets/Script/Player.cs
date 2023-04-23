@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     private bool isOverPipe = false;
     private WarpPipe currentPipe;
     [SerializeField] private float maxPushForce = 30f;
+    public LayerMask interactableLayer;
+    public float interactionRange = 2f;
+    private Interactable nearestInteractable;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +56,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
         CheckForPipeTeleport();
         //점프
         if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
@@ -72,7 +74,6 @@ public class Player : MonoBehaviour
         }
         var keyboard = Keyboard.current;
         bool isDownKeyPressed = keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed;
-
         
         if (GetComponent<PlayerInput>().actions["Dash"].triggered && !isDashing && dashCount > 0 && canDash && canDashSwamp) // 'canDash' 변수 사용
         {
@@ -86,6 +87,10 @@ public class Player : MonoBehaviour
             }
             dashCount--; // 대쉬 횟수 감소
             canDash = false; // 대쉬를 사용한 후 다시 사용할 수 없도록 함
+        }
+        if (GetComponent<PlayerInput>().actions["Interact"].triggered)
+        {
+            InteractWithObject();
         }
     }
 
@@ -125,7 +130,31 @@ public class Player : MonoBehaviour
             }
         }
     }
+    private void InteractWithObject()
+    {
+        Collider2D[] collidersInRange = Physics2D.OverlapCircleAll(transform.position, interactionRange);
+        float minDistance = float.MaxValue;
 
+        foreach (Collider2D collider in collidersInRange)
+        {
+            Interactable interactable = collider.GetComponent<Interactable>();
+            if (interactable != null)
+            {
+                float distance = Vector2.Distance(transform.position, collider.transform.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    nearestInteractable = interactable;
+                }
+            }
+        }
+
+        if (nearestInteractable != null)
+        {
+            nearestInteractable.Interact();
+        }
+    
+    }
     void Jump()
     {
         Vector2 movement = new Vector2(moveDirection.x * speed, rb.velocity.y);
