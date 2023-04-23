@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
     private bool isOverPipe = false;
     private WarpPipe currentPipe;
     [SerializeField] private float maxPushForce = 30f;
-    public LayerMask interactableLayer;
     public float interactionRange = 2f;
     private Interactable nearestInteractable;
     void Start()
