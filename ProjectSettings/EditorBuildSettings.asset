@@ -14,5 +14,14 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/pinball.unity
+    guid: b66ea3b06e946854f9ff081863bc6094
+  - enabled: 1
+    path: Assets/Scenes/The_world_of_rhythm.unity
+    guid: b836f6ef82bda574ebf30b2291610231
+  - enabled: 1
+    path: Assets/Scenes/Horror_Map.unity
+    guid: 2ff60fc0047f88549b63d36aa3d40bf3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: d24d05c040af24748a32473452c42d76, type: 2}
