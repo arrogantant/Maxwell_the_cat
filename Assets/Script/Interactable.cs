@@ -6,7 +6,7 @@ public class Interactable : MonoBehaviour
 {
     public float extensionLength = 0.1f; // 오브젝트가 늘어날 길이
     public float extensionDuration = 3f; // 오브젝트가 늘어나는 데 걸리는 시간
-    private bool canInteract = true; // 상호작용 가능 여부
+    public bool canInteract { get; set; } = true; // 상호작용 가능 여부
 
     public void Interact()
     {
