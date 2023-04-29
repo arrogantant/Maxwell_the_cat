@@ -6,20 +6,27 @@ public class BackGround : MonoBehaviour
 {   
     public float speed;
     public Transform[] backgrounds;
-    public float overlap = 0.01f;
+    public float overlap = 0.03f;
 
-    [SerializeField] float leftPosX = 0f;
-    [SerializeField] float rightPosX = 0f;
-    [SerializeField] float xScreenHalfSize;
-    [SerializeField] float yScreenHalfSize;
+    [SerializeField] public float leftPosX;
+    [SerializeField] public float rightPosX;
+    private float xScreenHalfSize;
+    private float yScreenHalfSize;
 
     void Start()
     {
         yScreenHalfSize = Camera.main.orthographicSize;
         xScreenHalfSize = yScreenHalfSize * Camera.main.aspect;
 
-        leftPosX = -(xScreenHalfSize * 2);
-        rightPosX = xScreenHalfSize * 2 * (backgrounds.Length - 1);
+        if (leftPosX == 0)
+        {
+            leftPosX = -(xScreenHalfSize * 2);
+        }
+
+        if (rightPosX == 0)
+        {
+            rightPosX = xScreenHalfSize * 2 * (backgrounds.Length - 1);
+        }
     }
 
     void Update()
