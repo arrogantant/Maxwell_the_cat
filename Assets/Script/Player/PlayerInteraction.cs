@@ -50,17 +50,21 @@ public class PlayerInteraction : MonoBehaviour
                 }
             }
         }
-        interactImage.enabled = nearestInteractable != null;
     }
     
     private void UpdateInteractImagePosition()
     {
-        if (nearestInteractable != null)
+        if (nearestInteractable != null && interactImage != null)
         {
+            interactImage.enabled = true; // 상호작용 가능한 대상이 있으면 이미지를 활성화합니다.
             Vector3 imagePosition = transform.position; // 플레이어의 위치를 기준으로 함
             imagePosition.x += imageHorizontalOffset; // x 축으로 오프셋을 적용
             imagePosition.y += imageHorizontalOffsetY;
             interactImage.transform.position = Camera.main.WorldToScreenPoint(imagePosition);
+        }
+        else if (interactImage != null)
+        {
+            interactImage.enabled = false; // 상호작용 가능한 대상이 없으면 이미지를 비활성화합니다.
         }
     }
 }

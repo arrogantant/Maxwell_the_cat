@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6561343355352960146}
   - component: {fileID: 6561343355352960141}
   - component: {fileID: 836890260}
+  - component: {fileID: 1571203204}
   m_Layer: 0
   m_Name: Cat
   m_TagString: Player
@@ -135,15 +136,17 @@ MonoBehaviour:
   acceleration: 40
   deceleration: 40
   groundCheckRadius: 0.15
-  dashForce: 11
+  dashForce: 12.5
   dashDuration: 0.15
   dashCooldown: 0.5
+  isButtStomping: 0
   maxJumpCount: 1
   isDashing: 0
   swampSpeedModifier: 0.1
   swampAnimationSpeedModifier: 0.5
   groundCheckOffset: {x: 0, y: -0.18}
   maxPushForce: 20
+  interactionRange: 2
 --- !u!114 &6561343355352960146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,4 +222,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.24, y: 0.2}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.01
+--- !u!114 &1571203204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6561343355352960148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f639e4faa0f6647a5d18ace58994cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 2112
+  interactionRange: 0.2
+  interactImage: {fileID: 0}
+  imageHorizontalOffset: 0
+  imageHorizontalOffsetY: 1.1
