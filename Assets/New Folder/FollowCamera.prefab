@@ -64,14 +64,14 @@ MonoBehaviour:
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.2
-  m_SoftZoneHeight: 0.8
+  m_ScreenX: 0.51
+  m_ScreenY: 0.7
+  m_DeadZoneWidth: 0.03
+  m_DeadZoneHeight: 0.06
+  m_SoftZoneWidth: 0.07
+  m_SoftZoneHeight: 0.85
   m_BiasX: 0
-  m_BiasY: 0
+  m_BiasY: -0.00000045269348
   m_CenterOnActivate: 1
 --- !u!114 &6221975352528552084
 MonoBehaviour:
@@ -94,16 +94,16 @@ MonoBehaviour:
   m_ZDamping: 1
   m_TargetMovementOnly: 1
   m_ScreenX: 0.51
-  m_ScreenY: 0.7
+  m_ScreenY: 0.71
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.02
+  m_DeadZoneWidth: 0.03
   m_DeadZoneHeight: 0.03
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.79
-  m_BiasX: 0.031999975
-  m_BiasY: -0.20599999
+  m_BiasX: -0.027000012
+  m_BiasY: -0.18599997
   m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.2
+    OrthographicSize: 4
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -249,7 +249,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.2
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
