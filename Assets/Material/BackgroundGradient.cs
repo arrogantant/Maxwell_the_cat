@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class BackgroundGradient : MonoBehaviour
 {
     public GameObject player;
-    public Color startColor;
-    public Color endColor;
+    public Color[] colors;
     public float minHeight;
     public float maxHeight;
 
@@ -20,6 +19,10 @@ public class BackgroundGradient : MonoBehaviour
     void Update()
     {
         float t = Mathf.InverseLerp(minHeight, maxHeight, player.transform.position.y);
-        mainCamera.backgroundColor = Color.Lerp(startColor, endColor, t);
+        int colorIndex = Mathf.FloorToInt(t * (colors.Length - 1));
+        Color startColor = colors[colorIndex];
+        Color endColor = colors[Mathf.Min(colorIndex + 1, colors.Length - 1)];
+        float colorT = (t - colorIndex * (1.0f / (colors.Length - 1))) * (colors.Length - 1);
+        mainCamera.backgroundColor = Color.Lerp(startColor, endColor, colorT);
     }
 }
