@@ -9,6 +9,7 @@ TagManager:
   - WarpPipe
   - Breakable
   - ButtStomp
+  - Ladder
   layers:
   - Default
   - TransparentFX

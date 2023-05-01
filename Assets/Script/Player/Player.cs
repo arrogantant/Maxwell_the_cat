@@ -38,13 +38,17 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxPushForce = 30f;
     public float interactionRange = 2f;
     private Interactable nearestInteractable;
+    //사다리
+    [SerializeField] private LayerMask ladderLayer;
+    private bool isOnLadder = false;
+    private float originalGravityScale; //중력
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         canDashSwamp = true;
-
+        originalGravityScale = rb.gravityScale;
         //세이브
         if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY") && PlayerPrefs.HasKey("SavedZ"))
         {
@@ -126,6 +130,23 @@ public class Player : MonoBehaviour
             if (isButtStomping)
             {
                 isButtStomping = false;
+            }
+        }
+        if (isOnLadder)
+        {
+            float verticalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().y;
+
+            if (verticalInput > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, speed);
+            }
+            else if (verticalInput < 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -speed);
+            }
+            else
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
     }
@@ -236,6 +257,17 @@ public class Player : MonoBehaviour
             isOverPipe = true;
             currentPipe = collision.GetComponent<WarpPipe>();
         }
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ladder"))
+        {
+            isOnLadder = false;
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {   
@@ -330,8 +362,12 @@ public class Player : MonoBehaviour
         canDashSwamp = value;
     }
     public float GetMaxPushForce()
-{
-    return maxPushForce;
-}
-    
+    {
+        return maxPushForce;
+    }
+    public void SetIsOnLadder(bool value)
+    {
+        isOnLadder = value;
+        rb.gravityScale = value ? 0f : originalGravityScale;
+    } 
 }
