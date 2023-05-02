@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(Dash());
             }
             dashCount--; // 대쉬 횟수 감소
-            canDash = false; // 대쉬를 사용한 후 다시 사용할 수 없도록 함
+            canDash = false; // 대쉬를 사용한 후 다시 사용할 수 없도록 함z
         }
         if (GetComponent<PlayerInput>().actions["Interact"].triggered)
         {
