@@ -42,9 +42,6 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask ladderLayer;
     private bool isOnLadder = false;
     private float originalGravityScale; //중력
-    public float maxHeight = 5f;
-    public float decelerationFactor = 0.95f;
-    public float decelerationThreshold = 10f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -62,7 +59,6 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        CheckHeightLimit();
         CheckForPipeTeleport();
         //점프
         if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
@@ -103,7 +99,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        DecelerateVelocity();
         if (!isDashing)
         {
             float targetSpeed = moveDirection.x * speed;
@@ -374,23 +369,5 @@ public class Player : MonoBehaviour
     {
         isOnLadder = value;
         rb.gravityScale = value ? 0f : originalGravityScale;
-    }
-    private void CheckHeightLimit()
-    {
-        if (transform.position.y > maxHeight)
-        {
-            // 플레이어가 최대 높이보다 높을 경우, Y축 속도를 0으로 설정하여 더 이상 상승하지 않게 함
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            transform.position = new Vector3(transform.position.x, maxHeight, transform.position.z);
-        }
-    }
-    private void DecelerateVelocity()
-    {
-        // Y축 속도가 임계값보다 클 때만 감속 계수를 적용
-        if (Mathf.Abs(rb.velocity.y) > decelerationThreshold)
-        {
-            float newYVelocity = rb.velocity.y * decelerationFactor;
-            rb.velocity = new Vector2(rb.velocity.x, newYVelocity);
-        }
-    }
+    } 
 }
