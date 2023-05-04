@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         private bool isMovingToObject = false;
     private GameObject targetObject;
     private Vector2 targetDirection;
-    
+    private bool isTouchingDashObject = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -162,6 +162,15 @@ public class Player : MonoBehaviour
         {
             MoveTowardObject();
         }
+            if (isMovingToObject && !isTouchingDashObject)
+    {
+        isMovingToObject = false;
+    }
+
+    if (isMovingToObject)
+    {
+        MoveTowardObject();
+    }
     }
     private void InteractWithObject()
     {
@@ -275,13 +284,14 @@ IEnumerator Dash()
         {
             isOnLadder = true;
         }
-                if (collision.CompareTag("DashObject"))
-        {
-            targetObject = collision.gameObject;
-            isMovingToObject = true;
-            targetDirection = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>();
-            rb.velocity = Vector2.zero;
-        }
+     if (collision.CompareTag("DashObject"))
+    {
+        isTouchingDashObject = true;
+        targetObject = collision.gameObject;
+        isMovingToObject = true;
+        targetDirection = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>();
+        rb.velocity = Vector2.zero;
+    }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -289,6 +299,10 @@ IEnumerator Dash()
         {
             isOnLadder = false;
         }
+            if (collision.CompareTag("DashObject"))
+    {
+        isTouchingDashObject = false;
+    }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {   
