@@ -10,6 +10,7 @@ TagManager:
   - Breakable
   - ButtStomp
   - Ladder
+  - DashObject
   layers:
   - Default
   - TransparentFX
