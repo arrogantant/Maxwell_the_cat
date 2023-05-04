@@ -21,13 +21,13 @@ public class Player : MonoBehaviour
     private int jumpCount = 0;
     [SerializeField] int maxJumpCount = 2;
     public bool isDashing = false;
-    private bool canDash = true;
+    public bool canDash = true;
     [SerializeField] float swampSpeedModifier = 0.5f;
     [SerializeField] float swampAnimationSpeedModifier = 0.5f;
     private bool isInSwamp = false;
     private bool canDashSwamp;
     private int dashCount = 1;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private SpriteRenderer sr;
     private bool isGrounded = false;
     private Vector2 moveDirection;
@@ -42,6 +42,11 @@ public class Player : MonoBehaviour
     [SerializeField] private LayerMask ladderLayer;
     private bool isOnLadder = false;
     private float originalGravityScale; //중력
+    private float initialDashSpeed; //대쉬
+        private bool isMovingToObject = false;
+    private GameObject targetObject;
+    private Vector2 targetDirection;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,6 +54,7 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         canDashSwamp = true;
         originalGravityScale = rb.gravityScale;
+        initialDashSpeed = speed;
         //세이브
         if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY") && PlayerPrefs.HasKey("SavedZ"))
         {
@@ -99,11 +105,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isDashing)
+        if (!isDashing&& !isMovingToObject)
         {
             float targetSpeed = moveDirection.x * speed;
             float currentSpeed = rb.velocity.x;
-
+        if (Mathf.Abs(rb.velocity.x) < initialDashSpeed)
+        {
+            isDashing = false;
+        }
             if (Mathf.Abs(moveDirection.x) > 0)
             {
                 currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
@@ -149,6 +158,10 @@ public class Player : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
+                if (isMovingToObject)
+        {
+            MoveTowardObject();
+        }
     }
     private void InteractWithObject()
     {
@@ -188,26 +201,27 @@ public class Player : MonoBehaviour
     }
 }
 
-    IEnumerator Dash()
+IEnumerator Dash()
+{
+    isDashing = true;
+    canDash = false;
+    float dashStartTime = Time.time;
+    Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), rb.velocity.y);
+    initialDashSpeed = Mathf.Abs(dashVelocity.x); // 초기 대쉬 속도 저장
+
+    while (Time.time < dashStartTime + dashDuration)
     {
-        isDashing = true;
-        canDash = false; // 대쉬 중에는 대쉬를 사용할 수 없도록 함
-        float dashStartTime = Time.time;
-        Vector2 originalVelocity = rb.velocity;
-        Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), originalVelocity.y);
-
-        while (Time.time < dashStartTime + dashDuration)
-        {
-            rb.velocity = dashVelocity;
-            yield return null;
-        }
-
-        rb.velocity = originalVelocity;
-        isDashing = false;
-        yield return new WaitForSeconds(dashCooldown); // 대쉬 쿨다운 대기
-        canDash = true; // 쿨다운이 끝나면 대쉬를 다시 사용할 수 있음
-        dashCount++; // 대쉬 쿨타임이 끝나면 대쉬 횟수를 증가시킴
+        rb.velocity = dashVelocity;
+        yield return null;
     }
+
+    // 대쉬가 끝난 후 isDashing을 false로 설정합니다.
+    isDashing = false;
+
+    yield return new WaitForSeconds(dashCooldown);
+    canDash = true;
+    dashCount++;
+}
     IEnumerator ButtStomp()
     {
         isButtStomping = true;
@@ -260,6 +274,13 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Ladder"))
         {
             isOnLadder = true;
+        }
+                if (collision.CompareTag("DashObject"))
+        {
+            targetObject = collision.gameObject;
+            isMovingToObject = true;
+            targetDirection = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>();
+            rb.velocity = Vector2.zero;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -370,4 +391,20 @@ public class Player : MonoBehaviour
         isOnLadder = value;
         rb.gravityScale = value ? 0f : originalGravityScale;
     } 
+        private void MoveTowardObject()
+    {
+        Vector2 currentPosition = transform.position;
+        Vector2 newPosition = currentPosition + targetDirection * Time.fixedDeltaTime * speed;
+        RaycastHit2D hit = Physics2D.Linecast(currentPosition, newPosition);
+
+        if (hit.collider != null && hit.collider.gameObject == targetObject)
+        {
+            transform.position = hit.point;
+            isMovingToObject = false;
+        }
+        else
+        {
+            rb.MovePosition(newPosition);
+        }
+    }
 }
