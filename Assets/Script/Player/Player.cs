@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
     private GameObject targetObject;
     private Vector2 targetDirection;
     private bool isTouchingDashObject = false;
+    [SerializeField] float maxSpeed = 20f;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -105,7 +106,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isDashing&& !isMovingToObject)
+        if (!isDashing)
         {
             float targetSpeed = moveDirection.x * speed;
             float currentSpeed = rb.velocity.x;
@@ -124,6 +125,8 @@ public class Player : MonoBehaviour
 
             Vector2 movement = new Vector2(currentSpeed, rb.velocity.y);
             rb.velocity = movement;
+            float clampedVerticalSpeed = Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed);
+            rb.velocity = new Vector2(rb.velocity.x, clampedVerticalSpeed);
             Vector2 checkPosition = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
             bool isInSwamp = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, swampLayer);
 
@@ -284,7 +287,7 @@ IEnumerator Dash()
         {
             isOnLadder = true;
         }
-     if (collision.CompareTag("DashObject"))
+     if (collision.CompareTag("DashObject")&& isDashing)
     {
         isTouchingDashObject = true;
         targetObject = collision.gameObject;
