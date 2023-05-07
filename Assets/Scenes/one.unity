@@ -2122,6 +2122,10 @@ PrefabInstance:
       propertyPath: ladderLayer.m_Bits
       value: 4096
       objectReference: {fileID: 0}
+    - target: {fileID: 6561343355352960147, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: dashObjectSpeedModifier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_Name
       value: Cat
