@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
     //사다리
     [SerializeField] private LayerMask ladderLayer;
     private bool isOnLadder = false;
+    private bool isClimbingUp;
+    public bool IsClimbingUp { get => isClimbingUp; }
+
     private float originalGravityScale; //중력
     private float initialDashSpeed; //대쉬
         private bool isMovingToObject = false;
@@ -48,6 +51,13 @@ public class Player : MonoBehaviour
     private Vector2 targetDirection;
     private bool isTouchingDashObject = false;
     [SerializeField] float maxSpeed = 20f;
+    private PlayerInput playerInput;
+
+    void Awake()
+    {
+        playerInput = GetComponent<PlayerInput>();
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -68,7 +78,7 @@ public class Player : MonoBehaviour
     {
         CheckForPipeTeleport();
         //점프
-        if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
+        if ((GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount) || (isOnLadder && GetComponent<PlayerInput>().actions["Jump"].triggered))
         {
             Jump();
             jumpCount++;
@@ -102,6 +112,8 @@ public class Player : MonoBehaviour
         {
             InteractWithObject();
         }
+        float climbValue = playerInput.actions["Climb"].ReadValue<float>();
+        isClimbingUp = climbValue > 0;
     }
 
     void FixedUpdate()
@@ -147,7 +159,7 @@ public class Player : MonoBehaviour
         if (isOnLadder)
         {
             float verticalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().y;
-
+            jumpCount = 0;
             if (verticalInput > 0)
             {
                 rb.velocity = new Vector2(rb.velocity.x, speed);
@@ -161,6 +173,7 @@ public class Player : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
+        
                 if (isMovingToObject)
         {
             MoveTowardObject();
@@ -174,6 +187,7 @@ public class Player : MonoBehaviour
     {
         MoveTowardObject();
     }
+    
     }
     private void InteractWithObject()
     {
@@ -406,7 +420,7 @@ IEnumerator Dash()
     public void SetIsOnLadder(bool value)
     {
         isOnLadder = value;
-        rb.gravityScale = value ? 0f : originalGravityScale;
+        rb.gravityScale = value && isClimbingUp ? 0f : originalGravityScale;
     } 
         private void MoveTowardObject()
     {
