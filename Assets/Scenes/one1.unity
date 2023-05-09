@@ -16175,9 +16175,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 317274440418715094, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 317274441108015398, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 317274441230983523, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 317274441656687427, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 317274441766521402, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300862939157919085, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8353423150625292490, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
       propertyPath: m_Name
       value: tajann
+      objectReference: {fileID: 0}
+    - target: {fileID: 8353423150625292490, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9016902839428058376, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
       propertyPath: m_RootOrder
