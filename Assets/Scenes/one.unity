@@ -574,17 +574,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: tajann
       objectReference: {fileID: 0}
+    - target: {fileID: 8353423150625292490, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 9016902839428058376, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9016902839428058376, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.923541
+      value: -4.94
       objectReference: {fileID: 0}
     - target: {fileID: 9016902839428058376, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8887479
+      value: -0.37
       objectReference: {fileID: 0}
     - target: {fileID: 9016902839428058376, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
       propertyPath: m_LocalPosition.z
@@ -829,6 +833,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6561343355352960144, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
   m_PrefabInstance: {fileID: 6561343355078255133}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &881976942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1300862939157919085, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+  m_PrefabInstance: {fileID: 404351543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1093377349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8353423150625292490, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+  m_PrefabInstance: {fileID: 404351543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1093377351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093377349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16639ae7d922a2b4c8d92359d9ff7f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ropePrefab: {fileID: 881976942}
+  ropeCnt: 8
+  pointRig: {fileID: 1980519269}
 --- !u!1 &1202942734
 GameObject:
   m_ObjectHideFlags: 0
@@ -1136,6 +1165,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &1980519269 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1300862939035842920, guid: 24d378e282bd7e14294507ffd2bbb158, type: 3}
+  m_PrefabInstance: {fileID: 404351543}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2012151767
 GameObject:
   m_ObjectHideFlags: 0
