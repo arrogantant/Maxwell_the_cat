@@ -43,10 +43,9 @@ public class Player : MonoBehaviour
     private bool isOnLadder = false;
     private bool isClimbingUp;
     public bool IsClimbingUp { get => isClimbingUp; }
-
     private float originalGravityScale; //중력
     private float initialDashSpeed; //대쉬
-        private bool isMovingToObject = false;
+    private bool isMovingToObject = false;
     private GameObject targetObject;
     private Vector2 targetDirection;
     private bool isTouchingDashObject = false;
@@ -83,12 +82,12 @@ public class Player : MonoBehaviour
             Jump();
             jumpCount++;
         }
-           if (isGrounded)
+        if (isGrounded)
         {
             myAnimator.SetBool("Jump", false);
             maxJumpCount = 1;
         }
-            else
+        else
         {
             myAnimator.SetBool("Jump", true);
         }
@@ -115,30 +114,39 @@ public class Player : MonoBehaviour
         float climbValue = playerInput.actions["Climb"].ReadValue<float>();
         isClimbingUp = climbValue > 0;
     }
-
     void FixedUpdate()
     {
         if (!isDashing)
         {
-            float targetSpeed = moveDirection.x * speed;
-            float currentSpeed = rb.velocity.x;
-        if (Mathf.Abs(rb.velocity.x) < initialDashSpeed)
-        {
-            isDashing = false;
-        }
-            if (Mathf.Abs(moveDirection.x) > 0)
+            bool isJumping = GetComponent<PlayerInput>().actions["Jump"].ReadValue<float>() > 0;
+            bool leftOrRightPressed = Mathf.Abs(GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().x) > 0;
+
+            if (!isOnLadder || (isOnLadder && GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().y <= 0) || (isOnLadder && isJumping && leftOrRightPressed))
             {
-                currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
-            }
-            else
-            {
-                currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deceleration * Time.fixedDeltaTime);
+                float targetSpeed = moveDirection.x * speed;
+                float currentSpeed = rb.velocity.x;
+
+                if (Mathf.Abs(moveDirection.x) > 0)
+                {
+                    currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, acceleration * Time.fixedDeltaTime);
+                }
+                else
+                {
+                    currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, deceleration * Time.fixedDeltaTime);
+                }
+
+                Vector2 movement = new Vector2(currentSpeed, rb.velocity.y);
+                rb.velocity = movement;
             }
 
-            Vector2 movement = new Vector2(currentSpeed, rb.velocity.y);
-            rb.velocity = movement;
+            if (Mathf.Abs(rb.velocity.x) < initialDashSpeed)
+            {
+                isDashing = false;
+            }
+
             float clampedVerticalSpeed = Mathf.Clamp(rb.velocity.y, -maxSpeed, maxSpeed);
             rb.velocity = new Vector2(rb.velocity.x, clampedVerticalSpeed);
+
             Vector2 checkPosition = new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y);
             bool isInSwamp = Physics2D.OverlapCircle(checkPosition, groundCheckRadius, swampLayer);
 
@@ -146,8 +154,10 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y - sinkingSpeed * Time.fixedDeltaTime);
             }
-        }  
+        }
+
         isGrounded = Physics2D.OverlapCircle(new Vector2(transform.position.x + groundCheckOffset.x, transform.position.y + groundCheckOffset.y), groundCheckRadius, groundLayer);
+
         if (isGrounded)
         {
             jumpCount = 0;
@@ -156,38 +166,49 @@ public class Player : MonoBehaviour
                 isButtStomping = false;
             }
         }
+
         if (isOnLadder)
         {
             float verticalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().y;
-            jumpCount = 0;
-            if (verticalInput > 0)
+            bool leftOrRightPressed = Mathf.Abs(GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().x) > 0;
+            bool isJumping = GetComponent<PlayerInput>().actions["Jump"].ReadValue<float>() > 0;
+
+            if (isJumping && leftOrRightPressed)
             {
-                rb.velocity = new Vector2(rb.velocity.x, speed);
-            }
-            else if (verticalInput < 0)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, -speed);
+                isOnLadder = false;
             }
             else
             {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
+                jumpCount = 0;
+                if (verticalInput > 0)
+                {
+                    rb.velocity = new Vector2(0, speed);
+                }
+                else if (verticalInput < 0)
+                {
+                    rb.velocity = new Vector2(0, -speed);
+                }
+                else
+                {
+                    rb.velocity = new Vector2(0, 0);
+                }
             }
         }
-        
-                if (isMovingToObject)
+
+        if (isMovingToObject)
         {
             MoveTowardObject();
         }
-            if (isMovingToObject && !isTouchingDashObject)
-    {
-        isMovingToObject = false;
-    }
 
-    if (isMovingToObject)
-    {
-        MoveTowardObject();
-    }
-    
+        if (isMovingToObject && !isTouchingDashObject)
+        {
+            isMovingToObject = false;
+        }
+
+        if (isMovingToObject)
+        {
+            MoveTowardObject();
+        }
     }
     private void InteractWithObject()
     {
@@ -207,12 +228,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
-
         if (nearestInteractable != null)
         {
             nearestInteractable.Interact();
         }
-    
     }
     void Jump()
     {
@@ -224,30 +243,28 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, 0); // Y축 속도를 초기화하여 점프 높이를 일정하게 유지
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
     }
-}
 
-IEnumerator Dash()
-{
-    isDashing = true;
-    canDash = false;
-    float dashStartTime = Time.time;
-    Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), rb.velocity.y);
-    initialDashSpeed = Mathf.Abs(dashVelocity.x); // 초기 대쉬 속도 저장
-
-    while (Time.time < dashStartTime + dashDuration)
+    IEnumerator Dash()
     {
-        rb.velocity = dashVelocity;
-        yield return null;
-    }
+        isDashing = true;
+        canDash = false;
+        float dashStartTime = Time.time;
+        Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), rb.velocity.y);
+        initialDashSpeed = Mathf.Abs(dashVelocity.x); // 초기 대쉬 속도 저장
 
+        while (Time.time < dashStartTime + dashDuration)
+        {
+            rb.velocity = dashVelocity;
+            yield return null;
+        }
     // 대쉬가 끝난 후 isDashing을 false로 설정합니다.
-    isDashing = false;
-
-    yield return new WaitForSeconds(dashCooldown);
-    canDash = true;
-    dashCount++;
-}
+        isDashing = false;
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
+        dashCount++;
+    }
     IEnumerator ButtStomp()
     {
         isButtStomping = true;
@@ -301,14 +318,14 @@ IEnumerator Dash()
         {
             isOnLadder = true;
         }
-     if (collision.CompareTag("DashObject")&& isDashing)
-    {
-        isTouchingDashObject = true;
-        targetObject = collision.gameObject;
-        isMovingToObject = true;
-        targetDirection = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>();
-        rb.velocity = Vector2.zero;
-    }
+        if (collision.CompareTag("DashObject")&& isDashing)
+        {
+            isTouchingDashObject = true;
+            targetObject = collision.gameObject;
+            isMovingToObject = true;
+            targetDirection = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>();
+            rb.velocity = Vector2.zero;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -316,10 +333,10 @@ IEnumerator Dash()
         {
             isOnLadder = false;
         }
-            if (collision.CompareTag("DashObject"))
-    {
-        isTouchingDashObject = false;
-    }
+        if (collision.CompareTag("DashObject"))
+        {
+            isTouchingDashObject = false;
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {   
@@ -438,4 +455,5 @@ IEnumerator Dash()
             rb.MovePosition(newPosition);
         }
     }
+
 }
