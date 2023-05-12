@@ -12,6 +12,7 @@ TagManager:
   - Ladder
   - DashObject
   - Vine
+  - Rope
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - icepLayer
   - 'Interactable '
   - ladderLayer
-  - Vine
+  - Rope
   - 
   - 
   - 
