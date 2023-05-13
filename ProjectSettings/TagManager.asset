@@ -28,8 +28,8 @@ TagManager:
   - 'Interactable '
   - ladderLayer
   - Rope
-  - 
-  - 
+  - IgnoreBanana
+  - monster
   - 
   - 
   - 

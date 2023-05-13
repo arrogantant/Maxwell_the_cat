@@ -9,10 +9,13 @@ public class Monkey : MonoBehaviour
     [SerializeField] private float throwForce = 10f;
     [SerializeField] private float throwInterval = 1f;
     [SerializeField] private float bananaLifeTime = 5f;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Collider2D monkeyCollider;
 
     private GameObject player;
     private float nextThrowTime;
     private Rigidbody2D playerRigidbody;
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -36,6 +39,19 @@ public class Monkey : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Player playerScript = collision.gameObject.GetComponent<Player>();
+            if (playerScript != null && playerScript.isDashing)
+            {
+                monkeyCollider.isTrigger = true;
+                StartCoroutine(PlayDeathAnimationAndDestroy());
+            }
+        }
+    }
+
     private void ThrowBanana()
     {
         GameObject banana = Instantiate(bananaPrefab, transform.position, Quaternion.identity);
@@ -52,6 +68,13 @@ public class Monkey : MonoBehaviour
     {
         yield return new WaitForSeconds(lifeTime);
         Destroy(banana);
+    }
+
+    private IEnumerator PlayDeathAnimationAndDestroy()
+    {
+        animator.SetTrigger("monDie");
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
     }
 }
 
