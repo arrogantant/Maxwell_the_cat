@@ -142,11 +142,17 @@ MonoBehaviour:
   isButtStomping: 0
   maxJumpCount: 1
   isDashing: 0
+  canDash: 1
   swampSpeedModifier: 0.1
   swampAnimationSpeedModifier: 0.5
+  rb: {fileID: 0}
   groundCheckOffset: {x: 0, y: -0.18}
   maxPushForce: 20
   interactionRange: 2
+  ladderLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  maxSpeed: 10
 --- !u!114 &6561343355352960146
 MonoBehaviour:
   m_ObjectHideFlags: 0
