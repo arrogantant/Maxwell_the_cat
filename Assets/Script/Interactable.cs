@@ -4,47 +4,53 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public float extensionLength = 0.1f; // 오브젝트가 늘어날 길이
-    public float extensionDuration = 3f; // 오브젝트가 늘어나는 데 걸리는 시간
-    public bool canInteract { get; set; } = true; // 상호작용 가능 여부
+    public float rotateZ = 45f;
+    public float rotationSpeed = 2f;
+    public float bounceForce = 10f;
+    public float interactionRange = 3f;
+    public bool canInteract { get; set; } = true;
+    public GameObject rotatingObject; // 이것이 Sprite Renderer를 가진 GameObject입니다.
+
+    // ...
 
     public void Interact()
     {
         if (canInteract)
         {
-            StartCoroutine(ExtendObject());
-            canInteract = false;
+            StartCoroutine(RotateAndBounce());
         }
     }
 
-    private IEnumerator ExtendObject()
+    private IEnumerator RotateAndBounce()
     {
-        float startTime = Time.time;
-        float initialSizeX = transform.localScale.x;
-        Vector3 initialPosition = transform.localPosition;
+        canInteract = false;
 
-        while (Time.time - startTime < extensionDuration)
+        // 회전하기
+        Quaternion startRotation = rotatingObject.transform.localRotation;
+        Quaternion endRotation = Quaternion.Euler(0, 0, rotateZ);
+        float t = 0f;
+        while (t < 1f)
         {
-            float progress = (Time.time - startTime) / extensionDuration;
-            Vector3 newSize = transform.localScale;
-            newSize.x = initialSizeX + extensionLength * progress;
-            transform.localScale = newSize;
-
-            Vector3 newPosition = initialPosition;
-            newPosition.x += (extensionLength * progress) / 2;
-            transform.localPosition = newPosition;
-
+            t += Time.deltaTime * rotationSpeed;
+            rotatingObject.transform.localRotation = Quaternion.Lerp(startRotation, endRotation, t);
             yield return null;
         }
 
-        // 오브젝트의 최종 길이 설정
-        Vector3 finalSize = transform.localScale;
-        finalSize.x = initialSizeX + extensionLength;
-        transform.localScale = finalSize;
+        // 플레이어를 튕겨냅니다.
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Rigidbody2D playerRigidbody = player.GetComponent<Rigidbody2D>();
+        playerRigidbody.AddForce(Vector2.up * bounceForce, ForceMode2D.Impulse);
 
-        // 오브젝트의 최종 위치 설정
-        Vector3 finalPosition = initialPosition;
-        finalPosition.x += extensionLength / 2;
-        transform.localPosition = finalPosition;
+        // 원래대로 돌아가기
+        t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime * rotationSpeed;
+            rotatingObject.transform.localRotation = Quaternion.Lerp(endRotation, startRotation, t);
+            yield return null;
+        }
+
+        // 상호작용 다시 허용
+        canInteract = true;
     }
 }

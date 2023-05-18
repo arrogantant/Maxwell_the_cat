@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private PlayerInput playerInput;
     private Interactable nearestInteractable;
+    private PinballInteractable Pinball;
 
     private void Awake()
     {
@@ -27,6 +28,11 @@ public class PlayerInteraction : MonoBehaviour
         {
             nearestInteractable.Interact();
             nearestInteractable.canInteract = false;
+        }
+        else if (playerInput.actions["Interact"].triggered && Pinball != null)
+        {
+            Pinball.Interact();
+            Pinball.canInteract = false;
         }
         UpdateInteractImagePosition();
     }
