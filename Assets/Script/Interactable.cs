@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public float interactionRange = 3f;
     public bool canInteract { get; set; } = true;
 
     private HingeJoint2D hingeJoint2D;
