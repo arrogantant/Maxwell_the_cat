@@ -1,83 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4701604372042439571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4701604372042439574}
-  - component: {fileID: 4701604372042439575}
-  - component: {fileID: 4701604372042439576}
-  m_Layer: 6
-  m_Name: pinball_0
-  m_TagString: Ground
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4701604372042439574
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701604372042439571}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7139931, y: -0.24483025, z: 0.0999355}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4701604373196709368}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!68 &4701604372042439575
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701604372042439571}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -1.205, y: -0.2511036}
-  - {x: -1.1093788, y: -0.09929553}
-  - {x: -0.90527344, y: 0.0050011873}
-  - {x: 0.94587326, y: 0.4743068}
-  - {x: 1.1988049, y: 0.07433188}
-  - {x: 0.9158344, y: -0.21805532}
-  - {x: -0.9969444, y: -0.48596787}
-  - {x: -1.2055968, y: -0.2678439}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!114 &4701604372042439576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4701604372042439571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 503d5c9c6167ea241ac3bfe3e0fe62c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotateZ: -60
-  rotationSpeed: 2
-  bounceForce: 50
-  interactionRange: 1
-  rotatingObject: {fileID: 4701604372410206812}
 --- !u!1 &4701604372410206812
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4701604372410206812}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.7139931, y: -0.24483025, z: 0.0999355}
+  m_LocalRotation: {x: -0, y: -0, z: 0.014231248, w: 0.99989873}
+  m_LocalPosition: {x: -0.712, y: -0.25, z: 0.0999355}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4701604373196709368}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.631}
 --- !u!212 &4701604372410206814
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -187,10 +109,9 @@ Transform:
   m_GameObject: {fileID: 4701604373196709367}
   m_LocalRotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
   m_LocalPosition: {x: -25.142008, y: -1.0971698, z: -0.0999355}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.2707915, y: 1.8508716, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4701604372042439574}
   - {fileID: 4701604372410206813}
   m_Father: {fileID: 0}
   m_RootOrder: 0
