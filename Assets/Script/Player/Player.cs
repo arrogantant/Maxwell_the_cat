@@ -261,7 +261,7 @@ public class Player : MonoBehaviour
             rb.velocity = dashVelocity;
             yield return null;
         }
-    // 대쉬가 끝난 후 isDashing을 false로 설정합니다.
+        // 대쉬가 끝난 후 isDashing을 false로 설정합니다.
         isDashing = false;
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
