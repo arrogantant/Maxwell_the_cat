@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
     private bool isTouchingDashObject = false;
     [SerializeField] float maxSpeed = 20f;
     private PlayerInput playerInput;
+    private GameManager gameManager;
 
     void Awake()
     {
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
         canDashSwamp = true;
         originalGravityScale = rb.gravityScale;
         initialDashSpeed = speed;
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         //세이브
         if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY") && PlayerPrefs.HasKey("SavedZ"))
         {
@@ -325,6 +327,11 @@ public class Player : MonoBehaviour
             isMovingToObject = true;
             targetDirection = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>();
             rb.velocity = Vector2.zero;
+        }
+        if (collision.CompareTag("Item"))
+        {
+            Destroy(collision.gameObject);
+            gameManager.ItemConsumed();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
