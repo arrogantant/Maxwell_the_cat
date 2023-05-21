@@ -13,6 +13,7 @@ TagManager:
   - DashObject
   - Vine
   - Rope
+  - Item
   layers:
   - Default
   - TransparentFX
