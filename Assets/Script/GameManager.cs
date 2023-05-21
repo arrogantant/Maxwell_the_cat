@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject newObjectPrefab;
+    public GameObject[] objectsToChangeColor;
 
-    // Update is called once per frame
-    void Update()
+    private int itemsConsumed = 0;
+    private Color[] colors = { Color.red, new Color(1, 0.5f, 0), Color.yellow, Color.green, Color.blue, Color.cyan, Color.magenta };
+
+    public void ItemConsumed()
     {
-        
+        if (itemsConsumed < colors.Length && itemsConsumed < objectsToChangeColor.Length)
+        {
+            var renderer = objectsToChangeColor[itemsConsumed].GetComponent<SpriteRenderer>();
+            renderer.color = colors[itemsConsumed];
+        }
+        itemsConsumed++;
+
+        if (itemsConsumed >= 7)
+        {
+            // 오브젝트 생성위치
+            Instantiate(newObjectPrefab, new Vector2(0, 0), Quaternion.identity);
+        }
     }
 }
