@@ -79,3 +79,6 @@ TagManager:
   - name: Player
     uniqueID: 3925699995
     locked: 0
+  - name: jg
+    uniqueID: 3497166589
+    locked: 0

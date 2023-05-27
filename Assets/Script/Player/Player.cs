@@ -53,8 +53,6 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private GameManager gameManager;
 
-        public bool isOnBee = false;
-
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -117,13 +115,6 @@ public class Player : MonoBehaviour
         }
         float climbValue = playerInput.actions["Climb"].ReadValue<float>();
         isClimbingUp = climbValue > 0;
-
-        float moveX = playerInput.actions["Move"].ReadValue<Vector2>().x;
-        if (isOnBee)
-        {
-            Vector3 movement = new Vector3(moveX, 0, 0);
-            transform.position += movement * speed * Time.deltaTime;
-        }
     }
     void FixedUpdate()
     {
@@ -354,14 +345,6 @@ public class Player : MonoBehaviour
             isTouchingDashObject = false;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Bee"))
-        {
-            isOnBee = true;
-            collision.collider.transform.SetParent(transform);
-        }
-    }
     private void OnCollisionExit2D(Collision2D collision)
     {   
         if (isGrounded && isButtStomping)
@@ -382,11 +365,6 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(PlatformDisappearCoroutine(platform));
             }
-        }
-        if (collision.collider.CompareTag("Bee"))
-        {
-            isOnBee = false;
-            collision.collider.transform.SetParent(null);
         }
         
     }
