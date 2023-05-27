@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 492770234489739550}
   - component: {fileID: 492770234489739537}
-  - component: {fileID: 492770234489739539}
   - component: {fileID: 835239785}
   - component: {fileID: 835239784}
+  - component: {fileID: 1199661186187569109}
+  - component: {fileID: 7892176993901765599}
   m_Layer: 0
   m_Name: JumpObj
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 492770234489739538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.475847, y: -22.34, z: 0}
-  m_LocalScale: {x: 1.4087, y: 1.9375, z: 1}
+  m_LocalScale: {x: 1.4460305, y: 1.8776312, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4481132, g: 0.61857545, b: 1, a: 1}
+  m_Sprite: {fileID: -1154189397, guid: 4120a09b1222a0449ba02a70b00498bb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -87,32 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &492770234489739539
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 492770234489739538}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.44306993}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.11386013}
-  m_EdgeRadius: 0
 --- !u!61 &835239785
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -126,18 +101,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01141791, y: 0}
+  m_Offset: {x: 0.002614081, y: -0.117518604}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.992, y: 1.028}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5661286, y: 1}
+  m_Size: {x: 0.26093984, y: 0.7649628}
   m_EdgeRadius: 0
 --- !u!114 &835239784
 MonoBehaviour:
@@ -151,4 +126,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550da00b60109c3449e6e3cd99fe893b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 33
+  bounceForce: 15
+--- !u!68 &1199661186187569109
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492770234489739538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 0.029277503, y: 0.10847871}
+  - {x: -0.48887268, y: 0.1057669}
+  - {x: -0.4710724, y: 0.1719578}
+  - {x: -0.3995939, y: 0.28216964}
+  - {x: -0.2521857, y: 0.41822118}
+  - {x: -0.024326988, y: 0.503974}
+  - {x: 0.20256688, y: 0.47192675}
+  - {x: 0.35299292, y: 0.36074784}
+  - {x: 0.43738672, y: 0.20830038}
+  - {x: 0.47723973, y: 0.108723015}
+  - {x: 0.011805505, y: 0.10621868}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!68 &7892176993901765599
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492770234489739538}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.11450799, y: -0.07579564}
+  - {x: -0.24107097, y: -0.07255563}
+  - {x: -0.3620228, y: -0.043146938}
+  - {x: -0.49151334, y: 0.09425008}
+  - {x: -0.5069262, y: 0.114582494}
+  - {x: -0.47597784, y: 0.20523496}
+  - {x: -0.44396254, y: 0.24859707}
+  - {x: 0.44545385, y: 0.2551245}
+  - {x: 0.4672224, y: 0.20132682}
+  - {x: 0.47844267, y: 0.17179438}
+  - {x: 0.49014506, y: 0.1478839}
+  - {x: 0.4917635, y: 0.10700011}
+  - {x: 0.4724365, y: 0.030924506}
+  - {x: 0.41045094, y: -0.030723814}
+  - {x: 0.36973935, y: -0.04579563}
+  - {x: 0.28275427, y: -0.07799812}
+  - {x: 0.1238091, y: -0.08118503}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
