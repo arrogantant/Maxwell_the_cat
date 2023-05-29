@@ -53,6 +53,8 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private GameManager gameManager;
 
+    [SerializeField] private GameObject ladderObject;
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -115,6 +117,35 @@ public class Player : MonoBehaviour
         }
         float climbValue = playerInput.actions["Climb"].ReadValue<float>();
         isClimbingUp = climbValue > 0;
+
+        if (isOnLadder)
+        {
+            float verticalInput = playerInput.actions["Move"].ReadValue<Vector2>().y;
+            bool leftOrRightPressed = Mathf.Abs(playerInput.actions["Move"].ReadValue<Vector2>().x) > 0;
+            bool isJumping = playerInput.actions["Jump"].ReadValue<float>() > 0;
+
+            if (isJumping && leftOrRightPressed)
+            {
+                isOnLadder = false;
+                if (ladderObject != null)
+                {
+                    StartCoroutine(TemporarilyDisableCollider(ladderObject, 0.1f));
+                }
+            }
+        }
+    }
+    private IEnumerator TemporarilyDisableCollider(GameObject obj, float time)
+    {
+        if (obj != null)
+        {
+            BoxCollider2D collider = obj.GetComponent<BoxCollider2D>();
+            if (collider != null)
+            {
+                collider.enabled = false;
+                yield return new WaitForSeconds(time);
+                collider.enabled = true;
+            }
+        }
     }
     void FixedUpdate()
     {
@@ -172,7 +203,8 @@ public class Player : MonoBehaviour
         if (isOnLadder)
         {
             float verticalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().y;
-            bool leftOrRightPressed = Mathf.Abs(GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().x) > 0;
+            float horizontalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().x; // Get the horizontal input
+            bool leftOrRightPressed = Mathf.Abs(horizontalInput) > 0; // Use the horizontal input here
             bool isJumping = GetComponent<PlayerInput>().actions["Jump"].ReadValue<float>() > 0;
 
             if (isJumping && leftOrRightPressed)
@@ -184,15 +216,15 @@ public class Player : MonoBehaviour
                 jumpCount = 0;
                 if (verticalInput > 0)
                 {
-                    rb.velocity = new Vector2(0, speed);
+                    rb.velocity = new Vector2(horizontalInput * speed, speed); // Use the horizontal input here
                 }
                 else if (verticalInput < 0)
                 {
-                    rb.velocity = new Vector2(0, -speed);
+                    rb.velocity = new Vector2(horizontalInput * speed, -speed); // Use the horizontal input here
                 }
                 else
                 {
-                    rb.velocity = new Vector2(0, 0);
+                    rb.velocity = new Vector2(horizontalInput * speed, 0); // Use the horizontal input here
                 }
             }
         }
