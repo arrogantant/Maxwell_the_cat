@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private GameManager gameManager;
 
-    [SerializeField] private GameObject ladderObject;
+    [SerializeField] private GameObject[] ladderObject;
 
     void Awake()
     {
@@ -127,9 +127,12 @@ public class Player : MonoBehaviour
             if (isJumping && leftOrRightPressed)
             {
                 isOnLadder = false;
-                if (ladderObject != null)
+                foreach (GameObject ladder in ladderObject)
                 {
-                    StartCoroutine(TemporarilyDisableCollider(ladderObject, 0.1f));
+                    if (ladder != null)
+                    {
+                        StartCoroutine(TemporarilyDisableCollider(ladder, 0.1f));
+                    }
                 }
             }
         }
@@ -203,8 +206,8 @@ public class Player : MonoBehaviour
         if (isOnLadder)
         {
             float verticalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().y;
-            float horizontalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().x; // Get the horizontal input
-            bool leftOrRightPressed = Mathf.Abs(horizontalInput) > 0; // Use the horizontal input here
+            float horizontalInput = GetComponent<PlayerInput>().actions["Move"].ReadValue<Vector2>().x;
+            bool leftOrRightPressed = Mathf.Abs(horizontalInput) > 0;
             bool isJumping = GetComponent<PlayerInput>().actions["Jump"].ReadValue<float>() > 0;
 
             if (isJumping && leftOrRightPressed)
@@ -216,15 +219,15 @@ public class Player : MonoBehaviour
                 jumpCount = 0;
                 if (verticalInput > 0)
                 {
-                    rb.velocity = new Vector2(horizontalInput * speed, speed); // Use the horizontal input here
+                    rb.velocity = new Vector2(horizontalInput * speed, speed); 
                 }
                 else if (verticalInput < 0)
                 {
-                    rb.velocity = new Vector2(horizontalInput * speed, -speed); // Use the horizontal input here
+                    rb.velocity = new Vector2(horizontalInput * speed, -speed); 
                 }
                 else
                 {
-                    rb.velocity = new Vector2(horizontalInput * speed, 0); // Use the horizontal input here
+                    rb.velocity = new Vector2(horizontalInput * speed, 0); 
                 }
             }
         }
