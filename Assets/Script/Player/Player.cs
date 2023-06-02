@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -69,12 +70,6 @@ public class Player : MonoBehaviour
         originalGravityScale = rb.gravityScale;
         initialDashSpeed = speed;
         gameManager = GameObject.FindObjectOfType<GameManager>();
-        //세이브
-        if (PlayerPrefs.HasKey("SavedX") && PlayerPrefs.HasKey("SavedY") && PlayerPrefs.HasKey("SavedZ"))
-        {
-            Vector3 savedPosition = new Vector3(PlayerPrefs.GetFloat("SavedX"), PlayerPrefs.GetFloat("SavedY"), PlayerPrefs.GetFloat("SavedZ"));
-            transform.position = savedPosition;
-        }
     }
 
     void Update()
@@ -498,4 +493,28 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // "Player Start" 태그를 가진 게임 오브젝트를 찾습니다.
+        GameObject playerStart = GameObject.FindWithTag("Player Start");
+        
+        // 플레이어가 없거나 "Player Start" 오브젝트가 없다면, 더 이상 실행하지 않습니다.
+        if (playerStart == null || this.gameObject == null)
+        {
+            return;
+        }
+
+        // 플레이어의 위치를 "Player Start" 오브젝트의 위치로 설정합니다.
+        this.transform.position = playerStart.transform.position;
+    }
 }
