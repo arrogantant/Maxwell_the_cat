@@ -14,8 +14,8 @@ public class AudioSettings : MonoBehaviour
     private void Start()
     {
         // 슬라이더의 초기 값 설정
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.1f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.1f);
     }
     private bool isMusicSelected = true; // 기본적으로 음악 슬라이더를 선택
 

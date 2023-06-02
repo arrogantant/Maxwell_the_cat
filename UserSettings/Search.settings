@@ -7,7 +7,7 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.8788AF05" = ""
+	"last_search.8788AF05" = "ref:Assets/Script/BackGroun/AudioSettings.cs"
 	"OpenInspectorPreview.8788AF05" = "0"
 	"currentGroup.8788AF05" = "scene"
 }
@@ -54,6 +54,7 @@ providers = {
 	}
 }
 recentSearches = [
+	"ref:Assets/Script/BackGroun/AudioSettings.cs"
 ]
 searchItemFavorites = [
 ]
