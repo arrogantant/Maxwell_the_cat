@@ -5,6 +5,6 @@ public class SceneChangerStart : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Cartoon");
+        SceneFader.instance.LoadScene("Cartoon");
     }
 }
