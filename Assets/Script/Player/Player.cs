@@ -56,6 +56,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject[] ladderObject;
 
+    private PauseManager pauseManager;
+
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -66,6 +68,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        pauseManager = FindObjectOfType<PauseManager>();
         canDashSwamp = true;
         originalGravityScale = rb.gravityScale;
         initialDashSpeed = speed;
@@ -74,6 +77,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (pauseManager != null && pauseManager.IsGamePaused())
+        {
+            return;
+        }
         CheckForPipeTeleport();
         //점프
         if ((GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount) || (isOnLadder && GetComponent<PlayerInput>().actions["Jump"].triggered))

@@ -40,11 +40,20 @@ public class SceneFader : MonoBehaviour
         float fadeDuration = 1f;
         float time = 0;
 
+        RectTransform fadeImageRectTransform = fadeImage.GetComponent<RectTransform>();
+
+        // Modify this to match your needs
+        Vector2 startPosition = new Vector2(1, 0);
+        Vector2 endPosition = new Vector2(-1, 0);
+
         while (time < fadeDuration)
         {
             float t = time / fadeDuration;
             float a = isFadeOut ? fadeCurve.Evaluate(t) : 1 - fadeCurve.Evaluate(t);
             fadeImage.color = new Color(0f, 0f, 0f, a);
+
+            fadeImageRectTransform.anchoredPosition = Vector2.Lerp(startPosition, endPosition, t);
+
             time += Time.deltaTime;
             yield return null;
         }
