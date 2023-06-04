@@ -11,6 +11,11 @@ public class PauseManager : MonoBehaviour
     private bool zKeyPressed = false; // Z키가 눌렸는지 표시하는 변수
     private int xKeyCount = 0; // X키를 누른 횟수를 저장하는 변수
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     private void Update()
     {
         // ESC 키를 눌렀는지 확인

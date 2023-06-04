@@ -58,9 +58,22 @@ public class Player : MonoBehaviour
 
     private PauseManager pauseManager;
 
+    public static Player instance = null;
+    
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        DontDestroyOnLoad(this.gameObject);
+
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Start()
@@ -74,9 +87,17 @@ public class Player : MonoBehaviour
         initialDashSpeed = speed;
         gameManager = GameObject.FindObjectOfType<GameManager>();
     }
-
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+    }
     void Update()
     {
+        if (Keyboard.current.uKey.wasPressedThisFrame)
+        {
+            ResetGame();
+        }
+
         if (pauseManager != null && pauseManager.IsGamePaused())
         {
             return;
@@ -128,7 +149,8 @@ public class Player : MonoBehaviour
 
             if (isJumping && leftOrRightPressed)
             {
-                isOnLadder = false;
+                SetIsOnLadder(false); // 점프하면 사다리에서 떨어짐
+
                 foreach (GameObject ladder in ladderObject)
                 {
                     if (ladder != null)
@@ -481,7 +503,15 @@ public class Player : MonoBehaviour
     public void SetIsOnLadder(bool value)
     {
         isOnLadder = value;
-        rb.gravityScale = value && isClimbingUp ? 0f : originalGravityScale;
+
+        if (!isOnLadder) // 사다리에서 떨어질 때
+        {
+            rb.gravityScale = originalGravityScale; // 중력을 다시 활성화
+        }
+        else if (isOnLadder && isClimbingUp)
+        {
+            rb.gravityScale = 0f; // 사다리를 올라갈 때 중력을 비활성화
+        }
     } 
         private void MoveTowardObject()
     {
