@@ -40,7 +40,7 @@ public class ButtonSysyem : MonoBehaviour
         if (keyboard == null)
             return; // 키보드가 연결되어 있지 않으면 반환
 
-        if (keyboard.xKey.wasPressedThisFrame || keyboard.escapeKey.wasPressedThisFrame)
+        if (keyboard.xKey.wasPressedThisFrame)
         {
             objectToActivate.SetActive(true);  // 오브젝트를 활성화
             objectToDeactivate.SetActive(false);  // 오브젝트를 비활성화

@@ -13,6 +13,6 @@ public class Animeition : MonoBehaviour
 
     private void Update()
     {
-            animator.SetTrigger("run"); // 'Run' 애니메이션 상태를 실행
+        animator.SetTrigger("run"); // 'Run' 애니메이션 상태를 실행
     }
 }
