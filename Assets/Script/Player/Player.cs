@@ -59,6 +59,9 @@ public class Player : MonoBehaviour
     private PauseManager pauseManager;
 
     public static Player instance = null;
+    public AudioClip jumpSound; // Inspector에서 설정
+    public AudioClip dashSound; // Inspector에서 설정
+    public AudioSource audioSource;
     
     void Awake()
     {
@@ -86,6 +89,11 @@ public class Player : MonoBehaviour
         originalGravityScale = rb.gravityScale;
         initialDashSpeed = speed;
         gameManager = GameObject.FindObjectOfType<GameManager>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
     public void ResetGame()
     {
@@ -298,6 +306,7 @@ public class Player : MonoBehaviour
     {
         Vector2 movement = new Vector2(moveDirection.x * speed, rb.velocity.y);
         rb.velocity = movement;
+        PlaySound(jumpSound);
 
         // 더블 점프를 위한 수정
         if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
@@ -314,6 +323,7 @@ public class Player : MonoBehaviour
         float dashStartTime = Time.time;
         Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), rb.velocity.y);
         initialDashSpeed = Mathf.Abs(dashVelocity.x); // 초기 대쉬 속도 저장
+        PlaySound(dashSound);
 
         while (Time.time < dashStartTime + dashDuration)
         {
@@ -553,5 +563,12 @@ public class Player : MonoBehaviour
 
         // 플레이어의 위치를 "Player Start" 오브젝트의 위치로 설정합니다.
         this.transform.position = playerStart.transform.position;
+    }
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
     }
 }
