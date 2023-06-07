@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlatformDisappear : MonoBehaviour
 {
-    [SerializeField] private float respawnTime = 10.0f;
+    [SerializeField] private float respawnTime = 4.0f;
     private SpriteRenderer sr;
     private BoxCollider2D boxCollider;
 
