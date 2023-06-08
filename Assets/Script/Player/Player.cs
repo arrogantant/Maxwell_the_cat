@@ -440,7 +440,7 @@ public class Player : MonoBehaviour
     private void CheckForPipeTeleport()
     {
         var keyboard = Keyboard.current;
-        if (isOverPipe && (keyboard.sKey.wasPressedThisFrame || keyboard.downArrowKey.wasPressedThisFrame))
+        if (isOverPipe && (keyboard.wKey.wasPressedThisFrame || keyboard.upArrowKey.wasPressedThisFrame))
         {
             currentPipe.TeleportPlayer(transform);
         }

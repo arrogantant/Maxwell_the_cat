@@ -16,6 +16,7 @@ TagManager:
   - Item
   - Bee
   - Player Start
+  - NPC
   layers:
   - Default
   - TransparentFX
