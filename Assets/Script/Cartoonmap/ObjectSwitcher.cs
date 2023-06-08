@@ -31,7 +31,7 @@ public class ObjectSwitcher : MonoBehaviour
 
     IEnumerator WaitAndSwitchObject()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         object2.SetActive(false);
         object3.SetActive(true);
     }
