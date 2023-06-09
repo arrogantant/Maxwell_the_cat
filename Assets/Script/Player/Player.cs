@@ -380,7 +380,7 @@ public class Player : MonoBehaviour
                 buttStomp.Break();
             }
         }
-        if (collision.tag == "WarpPipe")
+        if (collision.CompareTag("WarpPipe"))
         {
             isOverPipe = true;
             currentPipe = collision.GetComponent<WarpPipe>();
@@ -413,6 +413,11 @@ public class Player : MonoBehaviour
         {
             isTouchingDashObject = false;
         }
+        if (collision.CompareTag("WarpPipe"))
+        {
+            isOverPipe = false;
+            currentPipe = null;
+        }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {   
@@ -420,13 +425,6 @@ public class Player : MonoBehaviour
         {
             isButtStomping = false;
         }
-
-        if (collision.gameObject.CompareTag("WarpPipe"))
-        {
-            isOverPipe = false;
-            currentPipe = null;
-        }
-        
         if (collision.gameObject.CompareTag("DisappearingPlatform"))
         {
             PlatformDisappear platform = collision.gameObject.GetComponent<PlatformDisappear>();
@@ -435,7 +433,6 @@ public class Player : MonoBehaviour
                 StartCoroutine(PlatformDisappearCoroutine(platform));
             }
         }
-        
     }
     private void CheckForPipeTeleport()
     {
