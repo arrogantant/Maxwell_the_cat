@@ -352,6 +352,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 965512016}
     m_Modifications:
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45439458
@@ -7269,7 +7273,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -8841,6 +8845,10 @@ PrefabInstance:
     - target: {fileID: 8424196745613352816, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: moveSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
@@ -11308,6 +11316,10 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 34
       objectReference: {fileID: 0}
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45439458
@@ -11981,6 +11993,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 965512016}
     m_Modifications:
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45439458
@@ -18306,6 +18322,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 965512016}
     m_Modifications:
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45439458
@@ -18486,6 +18506,10 @@ PrefabInstance:
     - target: {fileID: 8424196745613352816, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: bounceForce
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
@@ -31260,6 +31284,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 965512016}
     m_Modifications:
+    - target: {fileID: 8424196745613352826, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8424196745613352827, guid: 4be3e2ebdadce8c4b8d81e897cb3ef8a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.45439458
