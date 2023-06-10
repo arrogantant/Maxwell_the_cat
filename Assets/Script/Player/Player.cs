@@ -53,16 +53,15 @@ public class Player : MonoBehaviour
     [SerializeField] float maxSpeed = 20f;
     private PlayerInput playerInput;
     private GameManager gameManager;
-
     [SerializeField] private GameObject[] ladderObject;
-
     private PauseManager pauseManager;
 
     public static Player instance = null;
     public AudioClip jumpSound; // Inspector에서 설정
     public AudioClip dashSound; // Inspector에서 설정
     public AudioSource audioSource;
-    
+    private Coroutine dashCoroutine;
+    private float lastDashTime = -999f; // 대쉬를 마지막으로 사용한 시간을 저장하기 위한 변수
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -129,7 +128,12 @@ public class Player : MonoBehaviour
         var keyboard = Keyboard.current;
         bool isDownKeyPressed = keyboard.sKey.isPressed || keyboard.downArrowKey.isPressed;
         
-        if (GetComponent<PlayerInput>().actions["Dash"].triggered && !isDashing && dashCount > 0 && canDash && canDashSwamp) // 'canDash' 변수 사용
+        if (Time.time >= lastDashTime + dashCooldown) // 대쉬 재사용 대기 시간이 지났는지 확인
+        {
+            canDash = true;
+        }
+
+        if (GetComponent<PlayerInput>().actions["Dash"].triggered && !isDashing && canDash && canDashSwamp) // 'canDash' 변수 사용
         {
             if(isDownKeyPressed)
             {
@@ -139,8 +143,8 @@ public class Player : MonoBehaviour
             {
                 StartCoroutine(Dash());
             }
-            dashCount--; // 대쉬 횟수 감소
-            canDash = false; // 대쉬를 사용한 후 다시 사용할 수 없도록 함z
+            canDash = false;
+            lastDashTime = Time.time; // 대쉬를 사용한 시간을 저장
         }
         if (GetComponent<PlayerInput>().actions["Interact"].triggered)
         {
@@ -302,52 +306,67 @@ public class Player : MonoBehaviour
             nearestInteractable.Interact();
         }
     }
-    void Jump()
-    {
-        Vector2 movement = new Vector2(moveDirection.x * speed, rb.velocity.y);
-        rb.velocity = movement;
-        PlaySound(jumpSound);
+IEnumerator DashCooldown()
+{
+    yield return new WaitForSeconds(0.5f);
+    canDash = true;
+}
 
-        // 더블 점프를 위한 수정
-        if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 0); // Y축 속도를 초기화하여 점프 높이를 일정하게 유지
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+IEnumerator Dash()
+{
+    if(!canDash || isDashing) yield break;
+
+    isDashing = true;
+    canDash = false;
+    dashCoroutine = StartCoroutine(DashCooldown());
+
+    float dashStartTime = Time.time;
+    Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), rb.velocity.y);
+    initialDashSpeed = Mathf.Abs(dashVelocity.x);
+    PlaySound(dashSound);
+
+    while (Time.time < dashStartTime + dashDuration)
+    {
+        rb.velocity = dashVelocity;
+        yield return null;
     }
 
-    IEnumerator Dash()
-    {
-        isDashing = true;
-        canDash = false;
-        float dashStartTime = Time.time;
-        Vector2 dashVelocity = new Vector2(dashForce * (sr.flipX ? -1 : 1), rb.velocity.y);
-        initialDashSpeed = Mathf.Abs(dashVelocity.x); // 초기 대쉬 속도 저장
-        PlaySound(dashSound);
+    isDashing = false;
+}
 
-        while (Time.time < dashStartTime + dashDuration)
-        {
-            rb.velocity = dashVelocity;
-            yield return null;
-        }
-        // 대쉬가 끝난 후 isDashing을 false로 설정합니다.
+void Jump()
+{
+    if(!canDash) return;
+
+    if (isDashing)
+    {
+        StopCoroutine(dashCoroutine);
         isDashing = false;
-        yield return new WaitForSeconds(dashCooldown);
-        canDash = true;
         dashCount++;
+        rb.velocity = Vector2.zero;
     }
-    IEnumerator ButtStomp()
-    {
-        isButtStomping = true;
-        canDash = false;
-        float stompForce = -jumpForce * 2; // 더 빠르게 내려가도록 힘을 증가시킵니다.
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(new Vector2(0, stompForce), ForceMode2D.Impulse);
 
-        yield return new WaitUntil(() => isGrounded);
-        canDash = true;
-        dashCount++;
+    Vector2 movement = new Vector2(moveDirection.x * speed, rb.velocity.y);
+    rb.velocity = movement;
+    PlaySound(jumpSound);
+
+    if (GetComponent<PlayerInput>().actions["Jump"].triggered && jumpCount < maxJumpCount)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
     }
+}
+IEnumerator ButtStomp()
+{
+    isButtStomping = true;
+    float stompForce = -jumpForce * 2; // 더 빠르게 내려가도록 힘을 증가시킵니다.
+    rb.velocity = new Vector2(rb.velocity.x, 0);
+    rb.AddForce(new Vector2(0, stompForce), ForceMode2D.Impulse);
+
+    yield return new WaitUntil(() => isGrounded);
+    isButtStomping = false;
+    dashCount++;
+}
 
     void OnMove(InputValue value)
     {
