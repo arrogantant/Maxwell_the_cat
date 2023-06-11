@@ -9,12 +9,14 @@ public class npc1 : MonoBehaviour
     private NpcUI dialogueUI; // 대화 UI 스크립트
     public GameObject player; // 플레이어 게임오브젝트
     private SpriteRenderer spriteRenderer; // NPC의 SpriteRenderer 컴포넌트
+    Animator myAnimator;
 
     private void Start()
     {
         dialogueUI = GameObject.FindObjectOfType<NpcUI>(); // 대화 UI 스크립트 인스턴스를 가져옵니다.
         player = GameObject.FindGameObjectWithTag("Player"); // 플레이어 게임오브젝트를 가져옵니다.
         spriteRenderer = GetComponent<SpriteRenderer>(); // NPC의 SpriteRenderer 컴포넌트를 가져옵니다.
+        myAnimator = GetComponent<Animator>();
     }
 
     private void Update()
