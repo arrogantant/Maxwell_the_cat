@@ -62,19 +62,20 @@ public class Player : MonoBehaviour
     public AudioSource audioSource;
     private Coroutine dashCoroutine;
     private float lastDashTime = -999f; // 대쉬를 마지막으로 사용한 시간을 저장하기 위한 변수
+    public static Player Instance { get; private set; }
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         DontDestroyOnLoad(this.gameObject);
 
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else if (instance != this)
+        else
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

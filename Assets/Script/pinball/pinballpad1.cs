@@ -5,6 +5,8 @@ using UnityEngine;
 public class pinballpad1 : MonoBehaviour
 {
     public float bounceForce = 10f;
+    public AudioSource audioSource;
+    public AudioClip jumpSound;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,6 +16,13 @@ public class pinballpad1 : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             Vector2 diagonalForce = new Vector2(-1, 1).normalized * bounceForce; // 대각선 방향으로 힘을 적용
             rb.AddForce(diagonalForce, ForceMode2D.Impulse);
+        }
+    }
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource != null && clip != null)
+        {
+            audioSource.PlayOneShot(clip);
         }
     }
 }
