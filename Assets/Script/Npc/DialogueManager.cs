@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 using Cinemachine;
+
 public class DialogueManager : MonoBehaviour
 {
     public GameObject player; // player 객체
@@ -13,7 +14,6 @@ public class DialogueManager : MonoBehaviour
     public DialogueUI dialogueUI;
 
     private InputAction zAction;
-    private InputAction upArrowAction; // 윗화살표를 위한 InputAction
 
     public PlayableDirector director;
     public CinemachineVirtualCamera cutsceneCam;
@@ -26,10 +26,8 @@ public class DialogueManager : MonoBehaviour
     {
         player = Player.Instance.gameObject;
         zAction = new InputAction("ZPress", InputActionType.Button, "<Keyboard>/z");
-        upArrowAction = new InputAction("UpArrowPress", InputActionType.Button, "<Keyboard>/upArrow"); // 윗화살표를 위한 InputAction 초기화
 
         zAction.Enable();
-        upArrowAction.Enable(); // 윗화살표를 위한 InputAction 활성화
 
         currentDialogueIndex = 0;
 
@@ -50,6 +48,9 @@ public class DialogueManager : MonoBehaviour
         {
             player.transform.position = playerPositionAfterCutscene; // player를 특정 위치로 이동
             player.SetActive(true); // 컷신이 끝나면 player를 활성화
+
+            Vector3 playerScale = player.transform.localScale;
+            player.transform.localScale = new Vector3(Mathf.Abs(playerScale.x), playerScale.y, playerScale.z); // 플레이어가 오른쪽을 바라보도록 설정
         }
     }
     public void StartDialogue()
@@ -64,22 +65,13 @@ public class DialogueManager : MonoBehaviour
         {
             ShowNextDialogue();
         }
-
-        if (isPlayerNear && upArrowAction.triggered) // player가 인터렉션 영역에 있고 윗화살표를 눌렀을 때
-        {
-            // 대화가 아직 시작되지 않았거나 대화가 끝난 경우에만 재생
-            if (!isDialogueStarted || (isDialogueStarted && !dialogueUI.isActiveAndEnabled))
-            {
-                director.Play();
-            }
-        }
     }
 
     public void ShowNextDialogue()
     {
         if (currentDialogueIndex < dialogues.Count)
         {
-            dialogueUI.ShowDialogue(dialogues[currentDialogueIndex]);
+            StartCoroutine(dialogueUI.ShowDialogue(dialogues[currentDialogueIndex]));
             currentDialogueIndex++;
         }
         else
@@ -109,6 +101,12 @@ public class DialogueManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerNear = true; // player가 인터렉션 영역에 들어왔을 때
+
+            // 대화가 아직 시작되지 않았거나 대화가 끝난 경우에만 재생
+            if (!isDialogueStarted || (isDialogueStarted && !dialogueUI.isActiveAndEnabled))
+            {
+                director.Play();
+            }
         }
     }
     
@@ -123,7 +121,6 @@ public class DialogueManager : MonoBehaviour
     private void OnDisable()
     {
         zAction.Disable();
-        upArrowAction.Disable(); // 윗화살표를 위한 InputAction 비활성화
     }
     private void DisableAnimationTrack()
     {
