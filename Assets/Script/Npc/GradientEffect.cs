@@ -1,27 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-[ExecuteInEditMode]
+using UnityEngine.UI;
 public class GradientEffect : MonoBehaviour
 {
-    public Gradient gradient;
-    public float gradientSpeed = 1.0f;
-    private SpriteRenderer spriteRenderer;
-    private float gradientTime;
+    public float duration = 1.0f;  // 페이드에 걸리는 시간
+    private Image image;
+    private float startTime;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        image = GetComponent<Image>();
+        startTime = Time.time;
     }
 
     void Update()
     {
-        // Repeat the gradient over time
-        gradientTime += Time.deltaTime * gradientSpeed;
-        if (gradientTime >= 1.0f)
-            gradientTime -= 1.0f;
-
-        spriteRenderer.color = gradient.Evaluate(gradientTime);
+        float t = (Time.time - startTime) / duration;
+        Color newColor = image.color;
+        newColor.a = Mathf.SmoothStep(0.0f, 1.0f, t);
+        image.color = newColor;
     }
 }
