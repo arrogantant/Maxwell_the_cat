@@ -12,15 +12,19 @@ public class DialogueManager : MonoBehaviour
     public List<string> dialogues;
     private int currentDialogueIndex;
     public DialogueUI dialogueUI;
-
     private InputAction zAction;
-
     public PlayableDirector director;
     public CinemachineVirtualCamera cutsceneCam;
-    
     private bool isDialogueStarted = false;
     private bool isPlayerNear = false; // player가 인터렉션 영역에 있는지
     public GameObject cat;
+    public RectTransform image1Rect;
+    public RectTransform image2Rect;
+    public float moveAmount = 100f;  // 이동할 양
+    public float duration = 2.0f;  // 애니메이션에 걸리는 시간
+
+    private Vector2 image1OriginalPos;
+    private Vector2 image2OriginalPos;
 
     void Start()
     {
@@ -33,12 +37,16 @@ public class DialogueManager : MonoBehaviour
 
         director.played += Director_played;
         director.stopped += Director_stopped;
+        image1OriginalPos = image1Rect.anchoredPosition;
+        image2OriginalPos = image2Rect.anchoredPosition;
     }
 
     private void Director_played(PlayableDirector obj)
     {
         cutsceneCam.Priority = 11;
         player.SetActive(false); // 컷신이 시작되면 player를 비활성화
+        StartCoroutine(MoveImage(image1Rect, image1Rect.anchoredPosition.y + moveAmount, duration)); // Image1을 +y 방향으로 이동
+        StartCoroutine(MoveImage(image2Rect, image2Rect.anchoredPosition.y - moveAmount, duration));
     }
 
     private void Director_stopped(PlayableDirector obj)
@@ -52,6 +60,8 @@ public class DialogueManager : MonoBehaviour
             Vector3 playerScale = player.transform.localScale;
             player.transform.localScale = new Vector3(Mathf.Abs(playerScale.x), playerScale.y, playerScale.z); // 플레이어가 오른쪽을 바라보도록 설정
         }
+        StartCoroutine(MoveImage(image1Rect, image1OriginalPos.y, duration)); // Image1을 원래 위치로 이동
+        StartCoroutine(MoveImage(image2Rect, image2OriginalPos.y, duration)); // Image2를 원래 위치로 이동
     }
     public void StartDialogue()
     {
@@ -126,5 +136,24 @@ public class DialogueManager : MonoBehaviour
     {
         Animator animator = cat.GetComponent<Animator>();
         animator.enabled = false; 
+    }
+    IEnumerator MoveImage(RectTransform imageRect, float targetY, float duration)
+    {
+        float startTime = Time.time;
+        float originalY = imageRect.anchoredPosition.y;
+
+        while (Time.time < startTime + duration)
+        {
+            float t = (Time.time - startTime) / duration;
+            Vector2 newPosition = imageRect.anchoredPosition;
+            newPosition.y = Mathf.Lerp(originalY, targetY, t);
+            imageRect.anchoredPosition = newPosition;
+
+            yield return null;
+        }
+
+        Vector2 finalPosition = imageRect.anchoredPosition;
+        finalPosition.y = targetY;
+        imageRect.anchoredPosition = finalPosition;
     }
 }

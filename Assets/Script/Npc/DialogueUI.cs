@@ -8,6 +8,7 @@ public class DialogueUI : MonoBehaviour
     public GameObject dialogueBox; // 대화창 UI
     public AudioClip textSound; // 텍스트 사운드
     private AudioSource audioSource; // 오디오 소스
+    
 
     void Start()
     {
