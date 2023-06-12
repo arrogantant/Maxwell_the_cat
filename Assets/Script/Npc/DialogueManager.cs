@@ -10,7 +10,6 @@ public class DialogueManager : MonoBehaviour
     public Vector3 playerPositionAfterCutscene; // 컷신 후 player를 이동시킬 위치
     public List<string> dialogues;
     private int currentDialogueIndex;
-
     public DialogueUI dialogueUI;
 
     private InputAction zAction;
@@ -21,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     
     private bool isDialogueStarted = false;
     private bool isPlayerNear = false; // player가 인터렉션 영역에 있는지
+    public GameObject cat;
 
     void Start()
     {
@@ -64,12 +64,14 @@ public class DialogueManager : MonoBehaviour
         {
             ShowNextDialogue();
         }
-            
+
         if (isPlayerNear && upArrowAction.triggered) // player가 인터렉션 영역에 있고 윗화살표를 눌렀을 때
         {
-            director.Play();
-            // ShowNextDialogue();
-            // isDialogueStarted = true;
+            // 대화가 아직 시작되지 않았거나 대화가 끝난 경우에만 재생
+            if (!isDialogueStarted || (isDialogueStarted && !dialogueUI.isActiveAndEnabled))
+            {
+                director.Play();
+            }
         }
     }
 
@@ -87,12 +89,18 @@ public class DialogueManager : MonoBehaviour
 
             // 대화가 끝났으므로, 컷신을 종료합니다.
             StopCutscene();
+
+            // 대화가 끝나면 'cat' 게임 오브젝트를 비활성화
+            cat.SetActive(false);
         }
     }
         private void StopCutscene()
     {
         director.Stop();  // 타임라인을 직접 종료합니다.
         // 타임라인이 종료되면 `Director_stopped`가 호출됩니다.
+        DisableAnimationTrack(); // 애니메이션 트랙 비활성화
+
+        director.gameObject.SetActive(false); // 타임라인 오브젝트를 비활성화합니다.
     }
 
 
@@ -116,5 +124,10 @@ public class DialogueManager : MonoBehaviour
     {
         zAction.Disable();
         upArrowAction.Disable(); // 윗화살표를 위한 InputAction 비활성화
+    }
+    private void DisableAnimationTrack()
+    {
+        Animator animator = cat.GetComponent<Animator>();
+        animator.enabled = false; 
     }
 }

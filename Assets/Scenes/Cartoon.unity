@@ -832,11 +832,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7908031330309403177, guid: 6308c945adda95a46a1abd42df4546bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.68
+      value: -34.75
       objectReference: {fileID: 0}
     - target: {fileID: 7908031330309403177, guid: 6308c945adda95a46a1abd42df4546bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.28
+      value: 10.82
       objectReference: {fileID: 0}
     - target: {fileID: 7908031330309403177, guid: 6308c945adda95a46a1abd42df4546bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1994,7 +1994,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: dba4520a10edaf046aba7515c30c0ce2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3984,7 +3984,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.048298173, y: -0.0000008215796}
@@ -6099,7 +6099,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 32105f31eca6ff44aa34a4867b98b3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6336,7 +6336,7 @@ PlayableDirector:
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 771359158ade53f478fd554085ece383, type: 2}
   m_InitialState: 0
-  m_WrapMode: 2
+  m_WrapMode: 0
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
@@ -26668,7 +26668,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 32105f31eca6ff44aa34a4867b98b3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -27453,7 +27453,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 32105f31eca6ff44aa34a4867b98b3ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -27620,7 +27620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
-  playerPositionAfterCutscene: {x: -16, y: -23, z: 0}
+  playerPositionAfterCutscene: {x: -16.02, y: -22.85, z: 0}
   dialogues:
   - "\uC57C\uC639"
   - fdsf
@@ -27631,6 +27631,7 @@ MonoBehaviour:
   dialogueUI: {fileID: 1226258058}
   director: {fileID: 1226258056}
   cutsceneCam: {fileID: 218403381416857160}
+  cat: {fileID: 1031775308792945080}
 --- !u!61 &2060918875
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -28861,7 +28862,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1031775308792945080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.6, y: -22.85, z: 0}
+  m_LocalPosition: {x: -15.81, y: -22.85, z: 0}
   m_LocalScale: {x: 1.5417, y: 1.5773234, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
