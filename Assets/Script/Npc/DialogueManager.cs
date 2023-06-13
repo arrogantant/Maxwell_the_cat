@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
 
     private Vector2 image1OriginalPos;
     private Vector2 image2OriginalPos;
+    private bool isDialogueInProgress = false;
 
     void Start()
     {
@@ -82,30 +83,41 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowNextDialogue()
     {
-        if (currentDialogueIndex < dialogues.Count)
+        if (currentDialogueIndex < dialogues.Count && !isDialogueInProgress)
         {
-            StartCoroutine(dialogueUI.ShowDialogue(dialogues[currentDialogueIndex]));
-            currentDialogueIndex++;
+            StartCoroutine(ShowDialogueAfterDelay(0.2f));
         }
-        else
+        else if (!isDialogueInProgress)
         {
             dialogueUI.HideDialogue();
             isDialogueStarted = false;
 
             // 대화가 끝났으므로, 컷신을 종료합니다.
-            StopCutscene();
+            director.Stop();
 
             // 대화가 끝나면 'cat' 게임 오브젝트를 비활성화
             cat.SetActive(false);
         }
     }
-        private void StopCutscene()
+    private IEnumerator ShowDialogueAfterDelay(float delay)
     {
-        director.Stop();  // 타임라인을 직접 종료합니다.
-        // 타임라인이 종료되면 `Director_stopped`가 호출됩니다.
-        DisableAnimationTrack(); // 애니메이션 트랙 비활성화
+        isDialogueInProgress = true;
+        
+        yield return new WaitForSeconds(delay);
 
-        director.gameObject.SetActive(false); // 타임라인 오브젝트를 비활성화합니다.
+        StartCoroutine(dialogueUI.ShowDialogue(dialogues[currentDialogueIndex]));
+        currentDialogueIndex++;
+
+        yield return StartCoroutine(WaitForDialogueToFinish());  // 이 코루틴이 완료될 때까지 대기합니다.
+
+        isDialogueInProgress = false;
+    }
+        private IEnumerator WaitForDialogueToFinish()
+    {
+        while (dialogueUI.isDialogueRunning)  // dialogueUI에 isDialogueRunning 이라는 bool 변수가 있어야 합니다.
+        {
+            yield return null;
+        }
     }
 
 
