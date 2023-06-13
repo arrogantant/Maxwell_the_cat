@@ -24433,7 +24433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1362050285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26380,8 +26380,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -27439,7 +27439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff2a8799a20fa5b4d943e248b928c2e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue: "\uBD80\uD0C1\uD55C\uB2E4!"
+  dialogue: "\uBD80\uD0C1\uD55C\uB2E4\uBA3C\uC2A4!!"
   player: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
 --- !u!61 &2007451880
 BoxCollider2D:
@@ -27826,12 +27826,17 @@ MonoBehaviour:
   player: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
   playerPositionAfterCutscene: {x: -15.00015, y: -22.85, z: 0}
   dialogues:
-  - "\uC57C\uC639"
-  - fdsf
-  - adxxzxc
-  - "\uC57C\uC639"
-  - "\uC57C\uC57C\uC57C\uC57C\uC591"
-  - "\uB05D"
+  - "\uB760\uAECD\uC544!!"
+  - "\uC0B4\uC544\uC788\uAD6C\uBA3C\uC2A4"
+  - "\uCEA3\uD0B7 \uC870\uC218\uC640 \uAD74\uB801\uC774 \uADF8\uB9AC\uACE0 \uC6E8\uC774\uBE0C\uC528"
+  - "\uD478\uCFE0\uD398\uCF00 \uBAA8\uB450 \uB2E4\uB978\uCC28\uC6D0\uC73C\uB85C \uB118\uC5B4\uAC00\uBC84\uB838\uBA3C\uC2A4"
+  - "\uC5EC\uAE30 \uCC28\uC6D0\uC774\uB3D9\uC7A5\uCE58\uB97C \uC904\uD14C\uB2C8"
+  - "\uBAA8\uB450\uC5D0\uAC8C \uC804\uB2EC\uD574\uC11C BH-19\uB85C \uBAA8\uC774\uB77C\uACE0
+    \uC804\uD574\uBA3C\uC2A4"
+  - "\uB098\uB294 \uC544\uC9C1 \uD560\uC77C\uC774 \uB0A8\uC558\uB2E4\uBA3C\uC2A4"
+  - "\uC624\uB978\uCABD\uC758 \uD3EC\uD0C8\uC744 \uD1B5\uD574\uC11C \uC6B0\uC120
+    AS-2\uB85C \uC774\uB3D9\uD574\uB77C\uBA3C\uC2A4"
+  - "\uBD80\uD0C1\uD55C\uB2E4\uBA3C\uC2A4!!"
   dialogueUI: {fileID: 1226258058}
   director: {fileID: 1226258056}
   cutsceneCam: {fileID: 218403381416857160}

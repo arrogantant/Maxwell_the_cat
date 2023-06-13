@@ -57,11 +57,14 @@ public class DialogueManager : MonoBehaviour
             player.transform.position = playerPositionAfterCutscene; // player를 특정 위치로 이동
             player.SetActive(true); // 컷신이 끝나면 player를 활성화
 
+            // 플레이어가 오른쪽을 바라보게 만드는 코드
             Vector3 playerScale = player.transform.localScale;
             player.transform.localScale = new Vector3(Mathf.Abs(playerScale.x), playerScale.y, playerScale.z); // 플레이어가 오른쪽을 바라보도록 설정
         }
         StartCoroutine(MoveImage(image1Rect, image1OriginalPos.y, duration)); // Image1을 원래 위치로 이동
         StartCoroutine(MoveImage(image2Rect, image2OriginalPos.y, duration)); // Image2를 원래 위치로 이동
+        Input.ResetInputAxes();
+        player.transform.localScale = new Vector3(Mathf.Abs(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
     }
     public void StartDialogue()
     {
