@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: interactionLayer.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 6221975352896985947, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.105004385
+      objectReference: {fileID: 0}
     - target: {fileID: 6561343355352960144, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -282,7 +286,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6221975352983310377, guid: d04ebddc3f90647448d1a2562755be03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.349968
+      value: 11.350128
       objectReference: {fileID: 0}
     - target: {fileID: 6221975352983310377, guid: d04ebddc3f90647448d1a2562755be03, type: 3}
       propertyPath: m_LocalPosition.y
@@ -322,7 +326,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6221975353674366262, guid: d04ebddc3f90647448d1a2562755be03, type: 3}
       propertyPath: orthographic size
-      value: 5
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221975353674366409, guid: d04ebddc3f90647448d1a2562755be03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.017986298
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221975353674366409, guid: d04ebddc3f90647448d1a2562755be03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.2099998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d04ebddc3f90647448d1a2562755be03, type: 3}

@@ -18,12 +18,12 @@ public class SceneChangerStart : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
 
             // 지정된 씬을 로드합니다.
-            SceneManager.LoadScene(lastScene);
+            SceneLoader.Instance.LoadScene(lastScene);
         }
         else
         {
             // 저장된 게임이 없는 경우, 기본 씬을 로드합니다.
-            SceneManager.LoadScene("Cartoon"); 
+            SceneLoader.Instance.LoadScene("Cartoon"); 
         }
     }
 
