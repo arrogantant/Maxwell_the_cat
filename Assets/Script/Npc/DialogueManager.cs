@@ -26,24 +26,28 @@ public class DialogueManager : MonoBehaviour
     private Vector2 image1OriginalPos;
     private Vector2 image2OriginalPos;
     private bool isDialogueInProgress = false;
+    public bool hasPlayedCutscene = false;
 
     void Start()
     {
         player = Player.Instance.gameObject;
         zAction = new InputAction("ZPress", InputActionType.Button, "<Keyboard>/z");
-
         zAction.Enable();
-
         currentDialogueIndex = 0;
-
         director.played += Director_played;
         director.stopped += Director_stopped;
         image1OriginalPos = image1Rect.anchoredPosition;
         image2OriginalPos = image2Rect.anchoredPosition;
+        if (PlayerPrefs.HasKey("HasPlayedCutscene"))
+        {
+            hasPlayedCutscene = PlayerPrefs.GetInt("HasPlayedCutscene") == 1;
+        }
     }
 
     private void Director_played(PlayableDirector obj)
     {
+        PlayerPrefs.SetInt("HasPlayedCutscene", 1);
+        hasPlayedCutscene = true;
         cutsceneCam.Priority = 11;
         player.SetActive(false); // 컷신이 시작되면 player를 비활성화
         StartCoroutine(MoveImage(image1Rect, image1Rect.anchoredPosition.y + moveAmount, duration)); // Image1을 +y 방향으로 이동
@@ -128,7 +132,7 @@ public class DialogueManager : MonoBehaviour
             isPlayerNear = true; // player가 인터렉션 영역에 들어왔을 때
 
             // 대화가 아직 시작되지 않았거나 대화가 끝난 경우에만 재생
-            if (!isDialogueStarted || (isDialogueStarted && !dialogueUI.isActiveAndEnabled))
+            if (!hasPlayedCutscene && (!isDialogueStarted || (isDialogueStarted && !dialogueUI.isActiveAndEnabled)))
             {
                 director.Play();
             }
