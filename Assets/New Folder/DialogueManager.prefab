@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4744054658030343539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4744054658030343548}
+  - component: {fileID: 4744054658030343550}
+  - component: {fileID: 4744054658030343549}
+  - component: {fileID: 4744054658030343551}
+  m_Layer: 0
+  m_Name: DialogueManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4744054658030343548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744054658030343539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -26.66, y: -22.49, z: -0.4376707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4744054658030343550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744054658030343539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e675dffb78f404c80c2c6d1de4db20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 6561343355352960148, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
+  playerPositionAfterCutscene: {x: -15.00015, y: -22.85, z: 0}
+  dialogues:
+  - "\uB760\uAECD\uC544!!"
+  - "\uC0B4\uC544\uC788\uAD6C\uBA3C\uC2A4"
+  - "\uCEA3\uD0B7 \uC870\uC218\uC640 \uAD74\uB801\uC774 \uADF8\uB9AC\uACE0 \uC6E8\uC774\uBE0C\uC528"
+  - "\uD478\uCFE0\uD398\uCF00 \uBAA8\uB450 \uB2E4\uB978\uCC28\uC6D0\uC73C\uB85C \uB118\uC5B4\uAC00\uBC84\uB838\uBA3C\uC2A4"
+  - "\uC5EC\uAE30 \uCC28\uC6D0\uC774\uB3D9\uC7A5\uCE58\uB97C \uC904\uD14C\uB2C8"
+  - "\uBAA8\uB450\uC5D0\uAC8C \uC804\uB2EC\uD574\uC11C BH-19\uB85C \uBAA8\uC774\uB77C\uACE0
+    \uC804\uD574\uBA3C\uC2A4"
+  - "\uB098\uB294 \uC544\uC9C1 \uD560\uC77C\uC774 \uB0A8\uC558\uB2E4\uBA3C\uC2A4"
+  - "\uC624\uB978\uCABD\uC758 \uD3EC\uD0C8\uC744 \uD1B5\uD574\uC11C \uC6B0\uC120
+    AS-2\uB85C \uC774\uB3D9\uD574\uB77C\uBA3C\uC2A4"
+  - "\uBD80\uD0C1\uD55C\uB2E4\uBA3C\uC2A4!!"
+  dialogueUI: {fileID: 0}
+  director: {fileID: 0}
+  cutsceneCam: {fileID: 0}
+  cat: {fileID: 0}
+  image1Rect: {fileID: 0}
+  image2Rect: {fileID: 0}
+  moveAmount: 55
+  duration: 2
+--- !u!114 &4744054658030343549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744054658030343539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: edc6b81d54731c4429d6ecfea8a85035, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4744054658030343550}
+          m_TargetAssemblyTypeName: DialogueManager, Assembly-CSharp
+          m_MethodName: StartDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!61 &4744054658030343551
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4744054658030343539}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
