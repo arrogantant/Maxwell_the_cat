@@ -27,6 +27,8 @@ public class DialogueManager : MonoBehaviour
     private Vector2 image2OriginalPos;
     private bool isDialogueInProgress = false;
     public bool hasPlayedCutscene = false;
+    public string npcName;
+    private InputAction uAction;
 
     void Start()
     {
@@ -38,15 +40,17 @@ public class DialogueManager : MonoBehaviour
         director.stopped += Director_stopped;
         image1OriginalPos = image1Rect.anchoredPosition;
         image2OriginalPos = image2Rect.anchoredPosition;
-        if (PlayerPrefs.HasKey("HasPlayedCutscene"))
+        if (PlayerPrefs.HasKey("HasPlayedCutscene_" + npcName))
         {
-            hasPlayedCutscene = PlayerPrefs.GetInt("HasPlayedCutscene") == 1;
+            hasPlayedCutscene = PlayerPrefs.GetInt("HasPlayedCutscene_" + npcName) == 1;
         }
+        uAction = new InputAction("UPress", InputActionType.Button, "<Keyboard>/u");
+        uAction.Enable();
     }
 
     private void Director_played(PlayableDirector obj)
     {
-        PlayerPrefs.SetInt("HasPlayedCutscene", 1);
+        PlayerPrefs.SetInt("HasPlayedCutscene_" + npcName, 1);
         hasPlayedCutscene = true;
         cutsceneCam.Priority = 11;
         player.SetActive(false); // 컷신이 시작되면 player를 비활성화
@@ -82,6 +86,11 @@ public class DialogueManager : MonoBehaviour
         if (isDialogueStarted && zAction.triggered)
         {
             ShowNextDialogue();
+        }
+        if (uAction.triggered)
+        {
+            PlayerPrefs.DeleteKey("HasPlayedCutscene_" + npcName);
+            Debug.Log("Dialogue state for " + npcName + " has been reset.");
         }
     }
 
@@ -150,6 +159,7 @@ public class DialogueManager : MonoBehaviour
     private void OnDisable()
     {
         zAction.Disable();
+        uAction.Disable();  // 'u' 액션도 Disable해주어야 합니다.
     }
     private void DisableAnimationTrack()
     {
