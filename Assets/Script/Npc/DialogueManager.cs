@@ -18,6 +18,7 @@ public class DialogueManager : MonoBehaviour
     private bool isDialogueStarted = false;
     private bool isPlayerNear = false; // player가 인터렉션 영역에 있는지
     public GameObject cat;
+    public GameObject Grid;
     public RectTransform image1Rect;
     public RectTransform image2Rect;
     public float moveAmount = 100f;  // 이동할 양
@@ -74,6 +75,9 @@ public class DialogueManager : MonoBehaviour
         StartCoroutine(MoveImage(image2Rect, image2OriginalPos.y, duration)); // Image2를 원래 위치로 이동
         Input.ResetInputAxes();
         player.transform.localScale = new Vector3(Mathf.Abs(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
+
+        // 컷신이 종료되었을 때, cat 오브젝트를 활성화합니다.
+        Grid.SetActive(true);
     }
     public void StartDialogue()
     {
