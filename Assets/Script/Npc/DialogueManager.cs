@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
     private void Director_stopped(PlayableDirector obj)
     {
         cutsceneCam.Priority = 0;
-        if (player != null) 
+        if (player != null) // player가 null이 아닌지 확인
         {
             player.transform.position = playerPositionAfterCutscene; // player를 특정 위치로 이동
             player.SetActive(true); // 컷신이 끝나면 player를 활성화
@@ -71,13 +71,20 @@ public class DialogueManager : MonoBehaviour
             Vector3 playerScale = player.transform.localScale;
             player.transform.localScale = new Vector3(Mathf.Abs(playerScale.x), playerScale.y, playerScale.z); // 플레이어가 오른쪽을 바라보도록 설정
         }
+        else 
+        {
+            Debug.LogError("Player object is null. Please check if the player object is initialized correctly and is not deleted or deactivated during the game.");
+        }
+
         StartCoroutine(MoveImage(image1Rect, image1OriginalPos.y, duration)); // Image1을 원래 위치로 이동
         StartCoroutine(MoveImage(image2Rect, image2OriginalPos.y, duration)); // Image2를 원래 위치로 이동
         Input.ResetInputAxes();
         player.transform.localScale = new Vector3(Mathf.Abs(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
 
-        // 컷신이 종료되었을 때, cat 오브젝트를 활성화합니다.
-        Grid.SetActive(true);
+        if (Grid != null)  // Grid 변수가 null이 아닌지 체크
+        {
+            Grid.SetActive(true);
+        }
     }
     public void StartDialogue()
     {

@@ -7826,7 +7826,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6221975352896985947, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.10444456
+      value: -0.10565699
       objectReference: {fileID: 0}
     - target: {fileID: 6221975352896985947, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8767,6 +8767,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2103226909}
     - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 2103226909}
+    - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
       propertyPath: npcName
       value: test1
       objectReference: {fileID: 0}
@@ -8796,7 +8800,7 @@ PrefabInstance:
       objectReference: {fileID: 594367905}
     - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
       propertyPath: dialogues.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
       propertyPath: dialogues.Array.data[0]
@@ -8810,6 +8814,10 @@ PrefabInstance:
     - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
       propertyPath: dialogues.Array.data[2]
       value: "\uC58D"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
+      propertyPath: dialogues.Array.data[3]
+      value: ?!!
       objectReference: {fileID: 0}
     - target: {fileID: 4744054658030343550, guid: db29f1b88990e8e439e1d84c8e01b347, type: 3}
       propertyPath: playerPositionAfterCutscene.x
@@ -15693,12 +15701,12 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 15
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].key
       value: 
-      objectReference: {fileID: -9007389982895888072, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[8].key
       value: 
@@ -15722,7 +15730,7 @@ PrefabInstance:
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[13].key
       value: 
-      objectReference: {fileID: 439929950353918824, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[14].key
       value: 
@@ -15730,11 +15738,11 @@ PrefabInstance:
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[15].key
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5846970292534990597, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[16].key
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2483159152226564579, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].value
       value: 
@@ -15770,11 +15778,11 @@ PrefabInstance:
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[15].value
       value: 
-      objectReference: {fileID: 635998642}
+      objectReference: {fileID: 2103226909}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[16].value
       value: 
-      objectReference: {fileID: 635998642}
+      objectReference: {fileID: 2103226912}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df2844c1b0731884b994e50df45744d7, type: 3}
 --- !u!114 &1169613531 stripped
@@ -21874,7 +21882,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 1237213383, guid: 74c311ccef4480d4192019782697beb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -27660,7 +27668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!156049354 &2103226910
 Grid:
   m_ObjectHideFlags: 0
