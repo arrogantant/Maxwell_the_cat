@@ -7947,7 +7947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6221975353751615163, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1.1277733e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6561343355352960144, guid: a27b44a6f0fd3cc4e8f3e5f2aa30493b, type: 3}
       propertyPath: m_RootOrder
@@ -15891,7 +15891,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 21
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].key
@@ -15950,6 +15950,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6969435814030153476, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
+      propertyPath: m_SceneBindings.Array.data[21].key
+      value: 
+      objectReference: {fileID: -4400374118212764002, guid: faa307aead80d1b43b64043bf8ca74ae, type: 2}
+    - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].value
       value: 
       objectReference: {fileID: 2103226909}
@@ -16005,6 +16009,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[20].value
       value: 
       objectReference: {fileID: 594367909}
+    - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
+      propertyPath: m_SceneBindings.Array.data[21].value
+      value: 
+      objectReference: {fileID: 660542875}
     - target: {fileID: 4335996551789429935, guid: df2844c1b0731884b994e50df45744d7, type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.size
       value: 2
