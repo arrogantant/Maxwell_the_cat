@@ -33,6 +33,8 @@ public class DialogueManager : MonoBehaviour
     public string npcName;
     private InputAction uAction;
     private bool isUsingDialogue2 = false;
+    public GameObject object1; // 비활성화하려는 첫 번째 오브젝트
+    
 
     void Start()
     {
@@ -55,6 +57,14 @@ public class DialogueManager : MonoBehaviour
         if (director2 != null)
         {
             director2.stopped += Director_stopped;
+        }
+        if (PlayerPrefs.HasKey("GridActive") && PlayerPrefs.GetInt("GridActive") == 1)
+        {
+            if (Grid != null) Grid.SetActive(true);
+        }
+            if (PlayerPrefs.HasKey("Object1Active"))
+        {
+            if (object1 != null) object1.SetActive(PlayerPrefs.GetInt("Object1Active") == 1);
         }
     }
 
@@ -86,6 +96,11 @@ public class DialogueManager : MonoBehaviour
             PerformOperationsAfterCutscene();
             Debug.Log("Director2 has stopped");
         }
+        if (object1 != null) 
+        {
+            object1.SetActive(false);
+            PlayerPrefs.SetInt("Object1Active", 0);
+        }
     }
     private void PerformOperationsAfterCutscene()
     {
@@ -112,6 +127,7 @@ public class DialogueManager : MonoBehaviour
         if (Grid != null)  // Grid 변수가 null이 아닌지 체크
         {
             Grid.SetActive(true);
+            PlayerPrefs.SetInt("GridActive", 1);  // Grid가 활성화되었음을 저장합니다.
         }
     }
     public void StartDialogue()
