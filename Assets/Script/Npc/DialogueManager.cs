@@ -10,10 +10,12 @@ public class DialogueManager : MonoBehaviour
     public GameObject player; // player 객체
     public Vector3 playerPositionAfterCutscene; // 컷신 후 player를 이동시킬 위치
     public List<string> dialogues;
+    public List<string> dialogues2;
     private int currentDialogueIndex;
     public DialogueUI dialogueUI;
     private InputAction zAction;
     public PlayableDirector director;
+    public PlayableDirector director2;
     public CinemachineVirtualCamera cutsceneCam;
     private bool isDialogueStarted = false;
     private bool isPlayerNear = false; // player가 인터렉션 영역에 있는지
@@ -30,6 +32,7 @@ public class DialogueManager : MonoBehaviour
     public bool hasPlayedCutscene = false;
     public string npcName;
     private InputAction uAction;
+    private bool isUsingDialogue2 = false;
 
     void Start()
     {
@@ -47,6 +50,12 @@ public class DialogueManager : MonoBehaviour
         }
         uAction = new InputAction("UPress", InputActionType.Button, "<Keyboard>/u");
         uAction.Enable();
+        director.played += Director_played;
+        director.stopped += Director_stopped;
+        if (director2 != null)
+        {
+            director2.stopped += Director_stopped;
+        }
     }
 
     private void Director_played(PlayableDirector obj)
@@ -60,6 +69,25 @@ public class DialogueManager : MonoBehaviour
     }
 
     private void Director_stopped(PlayableDirector obj)
+    {
+        if(obj == director)
+        {
+            if (director2 == null)
+            {
+                PerformOperationsAfterCutscene();
+            }
+            else 
+            {
+                director2.Play();
+            }
+        }
+        else if(director2 != null && obj == director2)
+        {
+            PerformOperationsAfterCutscene();
+            Debug.Log("Director2 has stopped");
+        }
+    }
+    private void PerformOperationsAfterCutscene()
     {
         cutsceneCam.Priority = 0;
         if (player != null) // player가 null이 아닌지 확인
@@ -91,7 +119,14 @@ public class DialogueManager : MonoBehaviour
         ShowNextDialogue();
         isDialogueStarted = true;
     }
-
+     public void StartDialogue2()
+    {
+        currentDialogueIndex = 0;
+        dialogues = dialogues2;  // dialogues를 dialogues2로 변경
+        isUsingDialogue2 = true;  // dialogues2를 사용 중임을 표시
+        ShowNextDialogue();
+        isDialogueStarted = true;
+    }
     void Update()
     {
         if (isDialogueStarted && zAction.triggered)
@@ -118,9 +153,25 @@ public class DialogueManager : MonoBehaviour
 
             // 대화가 끝났으므로, 컷신을 종료합니다.
             director.Stop();
-
+            
             // 대화가 끝나면 'cat' 게임 오브젝트를 비활성화
             cat.SetActive(false);
+
+            // dialogues2가 끝난 경우에만 Grid를 활성화
+            if (isUsingDialogue2)
+            {
+                isUsingDialogue2 = false;  // dialogues2 사용을 끝냄
+                if (Grid != null)
+                {
+                    Grid.SetActive(true);
+                }
+
+                // dialogues2가 끝나면, 두 번째 Timeline도 종료합니다.
+                if (director2 != null)
+                {
+                    director2.Stop();
+                }
+            }
         }
     }
     private IEnumerator ShowDialogueAfterDelay(float delay)
