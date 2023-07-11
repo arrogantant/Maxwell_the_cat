@@ -832,11 +832,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7908031330309403177, guid: 6308c945adda95a46a1abd42df4546bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.8
+      value: -36.14
       objectReference: {fileID: 0}
     - target: {fileID: 7908031330309403177, guid: 6308c945adda95a46a1abd42df4546bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.61
+      value: 10.3
       objectReference: {fileID: 0}
     - target: {fileID: 7908031330309403177, guid: 6308c945adda95a46a1abd42df4546bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27848,6 +27848,7 @@ MonoBehaviour:
   - "\uBD80\uD0C1\uD55C\uB2E4\uBA3C\uC2A4!!"
   dialogueUI: {fileID: 1226258058}
   director: {fileID: 1226258056}
+  director2: {fileID: 0}
   cutsceneCam: {fileID: 218403381416857160}
   cat: {fileID: 1031775308792945080}
   Grid: {fileID: 0}
