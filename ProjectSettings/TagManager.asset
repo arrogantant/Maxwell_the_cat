@@ -17,6 +17,7 @@ TagManager:
   - Bee
   - Player Start
   - NPC
+  - Timeline
   layers:
   - Default
   - TransparentFX

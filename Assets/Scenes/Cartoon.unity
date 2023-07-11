@@ -27770,7 +27770,7 @@ GameObject:
   - component: {fileID: 2060918875}
   m_Layer: 0
   m_Name: DialogueManager
-  m_TagString: Untagged
+  m_TagString: Timeline
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27846,6 +27846,7 @@ MonoBehaviour:
   - "\uC624\uB978\uCABD\uC758 \uD3EC\uD0C8\uC744 \uD1B5\uD574\uC11C \uC6B0\uC120
     AS-2\uB85C \uC774\uB3D9\uD574\uB77C\uBA3C\uC2A4"
   - "\uBD80\uD0C1\uD55C\uB2E4\uBA3C\uC2A4!!"
+  dialogues2: []
   dialogueUI: {fileID: 1226258058}
   director: {fileID: 1226258056}
   director2: {fileID: 0}
@@ -27858,6 +27859,7 @@ MonoBehaviour:
   duration: 2
   hasPlayedCutscene: 0
   npcName: hakase
+  object1: {fileID: 0}
 --- !u!61 &2060918875
 BoxCollider2D:
   m_ObjectHideFlags: 0
