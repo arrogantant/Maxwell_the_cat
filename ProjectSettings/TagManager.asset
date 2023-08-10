@@ -18,6 +18,7 @@ TagManager:
   - Player Start
   - NPC
   - Timeline
+  - MusicTrigger
   layers:
   - Default
   - TransparentFX
