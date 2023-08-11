@@ -6,7 +6,7 @@ public class Sound_Change : MonoBehaviour
 {
     public AudioClip music1; // 첫 번째 음악
     public AudioClip music2; // 두 번째 음악
-    private AudioSource audioSource; // 음악을 제어할 AudioSource
+    public AudioSource audioSource; // 음악을 제어할 AudioSource
     private bool playingFirstClip = true; // 현재 어떤 클립을 재생 중인지 추적
 
     void Start()
@@ -22,7 +22,7 @@ public class Sound_Change : MonoBehaviour
    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("MusicTrigger")) 
+        if (collision.CompareTag("Player")) 
         {
             audioSource.Stop(); // 현재 재생 중인 음악 중지
 
