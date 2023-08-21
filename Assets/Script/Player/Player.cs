@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     private float lastDashTime = -999f; // 대쉬를 마지막으로 사용한 시간을 저장하기 위한 변수
     public static Player Instance { get; private set; }
     private bool insideSlimeWall = false; // SlimeWall 안에 있는지 체크
+    private balloon attachedBalloon; // 부착된 풍선에 대한 참조 저장
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -614,24 +615,25 @@ public class Player : MonoBehaviour
             audioSource.PlayOneShot(clip);
         }
     }
-    public void AttachToBalloon()
+    public void AttachToBalloon(balloon balloonScript)
     {
         canDash = false; // 대쉬 불능
+        attachedBalloon = balloonScript; // 부착된 풍선에 대한 참조 저장
         StartCoroutine(RiseWithBalloon());
     }
 
     private IEnumerator RiseWithBalloon()
     {
-        float riseTime = 3f; // 올라가는 시간
-        float startTime = Time.time; // 시작 시간
+        float riseTime = 3f;
+        float startTime = Time.time;
 
-        // 3초 동안 위로 올라가게 하기
         while (Time.time < startTime + riseTime)
         {
-            rb.velocity = new Vector2(rb.velocity.x, 5.0f); // 위로 올라가는 힘 추가
-            yield return null; // 다음 프레임까지 대기
+            rb.velocity = new Vector2(rb.velocity.x, 5f);
+            yield return null;
         }
         
-        rb.velocity = new Vector2(rb.velocity.x, 0f); // 올라가는 힘 제거
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
+        attachedBalloon.DetachAndReset();
     }
 }
