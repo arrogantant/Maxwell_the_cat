@@ -191,7 +191,7 @@ public class Player : MonoBehaviour
         }
         if (insideSlimeWall)
         {
-            rb.velocity = new Vector2(rb.velocity.x, -0.5f); // 천천히 아래로 내려가게 설정
+            rb.velocity = new Vector2(rb.velocity.x, -0.8f); // 천천히 아래로 내려가게 설정
         }
     }
     private IEnumerator TemporarilyDisableCollider(GameObject obj, float time)
@@ -373,17 +373,17 @@ public class Player : MonoBehaviour
 
         isDashing = false;
     }
-IEnumerator ButtStomp()
-{
-    isButtStomping = true;
-    float stompForce = -jumpForce * 2; // 더 빠르게 내려가도록 힘을 증가시킵니다.
-    rb.velocity = new Vector2(rb.velocity.x, 0);
-    rb.AddForce(new Vector2(0, stompForce), ForceMode2D.Impulse);
+    IEnumerator ButtStomp()
+    {
+        isButtStomping = true;
+        float stompForce = -jumpForce * 2; // 더 빠르게 내려가도록 힘을 증가시킵니다.
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(0, stompForce), ForceMode2D.Impulse);
 
-    yield return new WaitUntil(() => isGrounded);
-    isButtStomping = false;
-    dashCount++;
-}
+        yield return new WaitUntil(() => isGrounded);
+        isButtStomping = false;
+        dashCount++;
+    }
 
     void OnMove(InputValue value)
     {
@@ -613,5 +613,25 @@ IEnumerator ButtStomp()
         {
             audioSource.PlayOneShot(clip);
         }
+    }
+    public void AttachToBalloon()
+    {
+        canDash = false; // 대쉬 불능
+        StartCoroutine(RiseWithBalloon());
+    }
+
+    private IEnumerator RiseWithBalloon()
+    {
+        float riseTime = 3f; // 올라가는 시간
+        float startTime = Time.time; // 시작 시간
+
+        // 3초 동안 위로 올라가게 하기
+        while (Time.time < startTime + riseTime)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 5.0f); // 위로 올라가는 힘 추가
+            yield return null; // 다음 프레임까지 대기
+        }
+        
+        rb.velocity = new Vector2(rb.velocity.x, 0f); // 올라가는 힘 제거
     }
 }
