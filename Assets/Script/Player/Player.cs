@@ -122,6 +122,11 @@ public class Player : MonoBehaviour
             }
             Jump();
             jumpCount++;
+            if (insideSlimeWall)
+            {
+                rb.gravityScale = originalGravityScale;
+                insideSlimeWall = false;
+            }
         }
         if (isGrounded)
         {
@@ -152,6 +157,11 @@ public class Player : MonoBehaviour
             }
             canDash = false;
             lastDashTime = Time.time; // 대쉬를 사용한 시간을 저장
+            if (insideSlimeWall)
+            {
+                rb.gravityScale = originalGravityScale;
+                insideSlimeWall = false;
+            }
         }
         if (GetComponent<PlayerInput>().actions["Interact"].triggered)
         {
