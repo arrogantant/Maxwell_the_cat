@@ -19,6 +19,7 @@ TagManager:
   - NPC
   - Timeline
   - MusicTrigger
+  - SlimeWall
   layers:
   - Default
   - TransparentFX

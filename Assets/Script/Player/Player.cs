@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashDuration = 0.1f;
     [SerializeField] float dashCooldown = 0.5f;
     public bool isButtStomping = false;
-    private int jumpCount = 0;
+    public int jumpCount = 0;
     [SerializeField] int maxJumpCount = 2;
     public bool isDashing = false;
     public bool canDash = true;
@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
     private Coroutine dashCoroutine;
     private float lastDashTime = -999f; // 대쉬를 마지막으로 사용한 시간을 저장하기 위한 변수
     public static Player Instance { get; private set; }
+    private bool insideSlimeWall = false; // SlimeWall 안에 있는지 체크
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -177,6 +178,10 @@ public class Player : MonoBehaviour
                     }
                 }
             }
+        }
+        if (insideSlimeWall)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -0.5f); // 천천히 아래로 내려가게 설정
         }
     }
     private IEnumerator TemporarilyDisableCollider(GameObject obj, float time)
@@ -423,6 +428,11 @@ IEnumerator ButtStomp()
             Destroy(collision.gameObject);
             gameManager.ItemConsumed();
         }
+        if (collision.CompareTag("SlimeWall"))
+        {
+            rb.gravityScale = 0; // 중력 영향을 받지 않게 설정
+            insideSlimeWall = true; // SlimeWall 안에 있다고 표시
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -438,6 +448,11 @@ IEnumerator ButtStomp()
         {
             isOverPipe = false;
             currentPipe = null;
+        }
+        if (collision.CompareTag("SlimeWall"))
+        {
+            rb.gravityScale = originalGravityScale; // 중력 스케일을 원래대로 복원
+            insideSlimeWall = false; // SlimeWall 안에 없다고 표시
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
