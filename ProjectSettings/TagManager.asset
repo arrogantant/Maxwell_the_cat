@@ -21,6 +21,7 @@ TagManager:
   - MusicTrigger
   - SlimeWall
   - balloon
+  - WaterTrigger
   layers:
   - Default
   - TransparentFX
@@ -87,4 +88,7 @@ TagManager:
     locked: 0
   - name: jg
     uniqueID: 3497166589
+    locked: 0
+  - name: BackGround 5
+    uniqueID: 2928421195
     locked: 0
