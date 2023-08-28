@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
     private bool insideSlimeWall = false; // SlimeWall 안에 있는지 체크
     private balloon attachedBalloon; // 부착된 풍선에 대한 참조 저장
     private bool isInWater = false;
+    private int waterCounter = 0;
     void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -409,7 +410,8 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("WaterTrigger"))
         {
-            isInWater = true;
+            waterCounter++;
+            UpdateWaterState();
         }
         if (collision.gameObject.CompareTag("Breakable") && isDashing)
         {
@@ -459,7 +461,8 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("WaterTrigger"))
         {
-            isInWater = false;
+            waterCounter--;
+            UpdateWaterState();
         }
         if (collision.CompareTag("Ladder"))
         {
@@ -649,5 +652,9 @@ public class Player : MonoBehaviour
         
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         attachedBalloon.DetachAndReset();
+    }
+    private void UpdateWaterState()
+    {
+        isInWater = waterCounter > 0;
     }
 }
