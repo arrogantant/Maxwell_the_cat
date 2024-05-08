@@ -98,6 +98,14 @@ public class Player : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        // GameManager를 찾고, 없다면 null 처리
+        gameManager = FindObjectOfType<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.LogWarning("GameManager not found in the scene.");
+            // 여기서 추가적인 예외 처리 또는 대체 로직을 구현할 수 있습니다.
+            // 예를 들어, 게임의 특정 기능을 비활성화하거나 기본 설정을 사용할 수 있습니다.
+        }
     }
     public void ResetGame()
     {
