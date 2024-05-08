@@ -3527,7 +3527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 672118378}
   m_LocalRotation: {x: -0, y: -0, z: -0.98700094, w: 0.16071464}
-  m_LocalPosition: {x: -34.197823, y: 8.430083, z: 0.28611454}
+  m_LocalPosition: {x: -34.42, y: 7.98, z: 0.28611454}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -25994,7 +25994,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Z X
+  m_text: "Z  \u2193  X"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1841a019fb30d0946bc881bc00cd36ab, type: 2}
   m_sharedMaterial: {fileID: -5025424163176834985, guid: 1841a019fb30d0946bc881bc00cd36ab, type: 2}
