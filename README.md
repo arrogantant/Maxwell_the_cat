@@ -1,14 +1,16 @@
-# Maxwell_the_cat
-
 # Gameplay
 
 **The only way forward is upwards. Navigate through various obstacles and objects to reach space!**
+
+
 
 ---
 
 **You can dash while jumping! Even places that seem easy to reach will require a lot of practice.**
 
 *Don't hesitate at crossroads! There may be split paths, but they all lead to the same destination in the end.*
+
+
 
 ---
 
