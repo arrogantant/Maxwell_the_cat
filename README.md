@@ -5,7 +5,7 @@
 
 **You can dash while jumping! Even places that seem easy to reach will require a lot of practice.**
 
-*Don't hesitate at crossroads! There may be split paths, but they all lead to the same destination in the end.*
+**Don't hesitate at crossroads! There may be split paths, but they all lead to the same destination in the end.**
 
 
 ## Features
@@ -24,6 +24,11 @@ https://drive.google.com/file/d/1C12p8IiPQVGI8L0ukO8OXQ478qrxUxyw/view?usp=drive
 ![Jump_Cat_ホンジュンソン (online-video-cutter com)](https://github.com/arrogantant/Maxwell_the_cat/assets/109032080/f4083dd2-e252-49a0-b4e2-30ef99ad02da)
 
 ## Play screenshot
+![22](https://github.com/arrogantant/Maxwell_the_cat/assets/109032080/291e3928-08d0-47f6-8c30-840a7802d06b)
+![21e](https://github.com/arrogantant/Maxwell_the_cat/assets/109032080/18098203-86d0-40f6-9a66-ad6cb1b1c0cc)
+**Interact with various NPCs to progress through**
+
+
 ![image](https://github.com/arrogantant/Maxwell_the_cat/assets/109032080/6ff0e422-af31-46ec-ac2e-2d226839381a)
 ![image](https://github.com/arrogantant/Maxwell_the_cat/assets/109032080/4ff643e6-79c4-4037-a48e-72dc63e4e1e7)
 ![image](https://github.com/arrogantant/Maxwell_the_cat/assets/109032080/1af7803d-a681-4ec6-9c00-1b4a1cd7d436)
